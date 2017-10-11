@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1507487716 source:/home/mathieu/workspace/projetsC/Othello/Damier.cpp
+	"Damier.h"
+
+1507496536 /home/mathieu/workspace/projetsC/Othello/Damier.h
+	<iostream>
+
+1507496140 source:/home/mathieu/workspace/projetsC/Othello/Othello.cpp
+	"Othello.h"
+
+1507558394 /home/mathieu/workspace/projetsC/Othello/Othello.h
+	"Damier.h"
+	<vector>
+
+1507559814 source:/home/mathieu/workspace/projetsC/Othello/main.cpp
+	<iostream>
+	"Damier.h"
+	"Othello.h"
+	"IA_main.h"
+	"Partie.h"
+
+1507496494 source:/home/mathieu/workspace/projetsC/Othello/IA_main.cpp
+	"IA_main.h"
+
+1507587951 /home/mathieu/workspace/projetsC/Othello/IA_main.h
+	"Damier.h"
+	"Othello.h"
+	"TranspositionTable.h"
+
+1507644146 /home/mathieu/workspace/projetsC/Othello/TranspositionTable.h
+	"Damier.h"
+
+1507585666 /home/mathieu/workspace/projetsC/Othello/Partie.h
+	"Damier.h"
+	"Othello.h"
+	<iostream>
+	<string>
+	"IA_main.h"
+	"TranspositionTable.h"
+	"IA_ab.h"
+
+1507585737 /home/mathieu/workspace/projetsC/Othello/IA_ab.h
+	"Damier.h"
+	"Othello.h"
+	"IA_main.h"
+
