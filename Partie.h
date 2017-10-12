@@ -17,5 +17,5 @@ void playerVSIA(int player);
 /**
   *@brief lance une partie IA contre IA
 */
-void IAVSIA();
+void IAVSIA(int prof);
 #endif // PARTIE_H_INCLUDED

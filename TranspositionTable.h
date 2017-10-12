@@ -20,7 +20,8 @@ class Table
 {
     public:
 
-    Table(int randvals[8][8][2]);
+    Table();
+    ~Table();
     Noeud** hashtable;
 
     /**
@@ -33,7 +34,7 @@ class Table
 
 /**
   *@brief fonction de hashage de type Zobrist
-  *@param _damier est la position a hasher et randvals les seeds necessaires
+  *@param _damier est la position à hasher
 */
-unsigned int hashage(Damier* _damier,int randvals[8][8][2]);
+unsigned int hashage(Damier* _damier);
 #endif // TRANSPOSITIONTABLE_H_INCLUDED

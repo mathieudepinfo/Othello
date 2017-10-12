@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="Damier.cpp" />
 		<Unit filename="Damier.h" />
+		<Unit filename="IA_MTDf.cpp" />
+		<Unit filename="IA_MTDf.h" />
 		<Unit filename="IA_ab.c">
 			<Option compilerVar="CC" />
 		</Unit>

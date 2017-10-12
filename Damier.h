@@ -6,9 +6,11 @@ class Damier
 {
     public:
 
+    int contigues[8][8];
     int cases[8][8];
+    int nbpion;
 
-    Damier(int setup[8][8]);
+    Damier(int setup[8][8],int cont[8][8]);
 
     /**
     *@param i numero de ligne, j numero de colonne

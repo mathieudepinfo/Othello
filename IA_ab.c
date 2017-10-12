@@ -22,7 +22,7 @@ int alphaBeta2(Damier* _damier,int joueur,char prof,int alpha,int beta,bool maxn
                 if(estValide(_damier,joueur,i,j)){
 
                     if(val<beta){
-                        Damier* fils=new Damier(_damier->cases);
+                        Damier* fils=new Damier(_damier->cases,_damier->contigues);
                         joueCoup(fils,joueur,i,j);
                         val=maxi(val,alphaBeta2(fils,joueur,prof-1,alpha,beta,false));
                         alpha=maxi(alpha,val);
@@ -48,7 +48,7 @@ int alphaBeta2(Damier* _damier,int joueur,char prof,int alpha,int beta,bool maxn
                 if(estValide(_damier,3-joueur,i,j)){
 
                     if(val>alpha){
-                        Damier* fils=new Damier(_damier->cases);
+                        Damier* fils=new Damier(_damier->cases,_damier->contigues);
                         joueCoup(fils,3-joueur,i,j);
                         val=mini(val,alphaBeta2(fils,joueur,prof-1,alpha,beta,true));
                         beta=mini(val,beta);
@@ -82,7 +82,7 @@ int joueCoupIA2(Damier* _damier,int joueur,char prof)
             if(estValide(_damier,joueur,i,j)){
 
                 if(val<beta){
-                    Damier* fils=new Damier(_damier->cases);
+                    Damier* fils=new Damier(_damier->cases,_damier->contigues);
                     joueCoup(fils,joueur,i,j);
                     val=alphaBeta2(fils,joueur,prof-1,alpha,beta,false);
                     if(val>vmax){

@@ -1,7 +1,6 @@
 #include "Partie.h"
 
 using namespace std;
-
 void playerVSIA(int player)
 {
     //position initiale
@@ -16,26 +15,20 @@ void playerVSIA(int player)
         {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
     };
+    int cont[8][8]=
+    {
+        {3,5,5,5,5,5,5,3},
+        {5,8,8,8,8,8,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,8,8,8,8,8,5},
+        {3,5,5,5,5,5,5,3},
+    };
 
-    Damier* dam=new Damier(setup);
-
-    //seeds pour la fonction de hashage, rotations=meme cle
-    int randvals[8][8][2];
-    int x;
-    srand (time(NULL));
-    for (int i(0);i<4;i++){
-        for(int j(0);j<4;j++){
-            for(int k(0);k<2;k++){
-                x=rand();
-                randvals[i][j][k]=x;
-                randvals[7-i][j][k]=x;
-                randvals[7-i][7-j][k]=x;
-                randvals[i][7-j][k]=x;
-            }
-        }
-    }
-
-    Table* ttable=new Table(randvals);
+    Damier* dam=new Damier(setup,cont);
+    Table* ttable=new Table();
 
     int joueur=1;
     int i(0),j(0);
@@ -62,7 +55,7 @@ void playerVSIA(int player)
         }
         else{
             //profondeur de 4
-            coup=joueCoupIA(randvals,ttable,dam,joueur,4);
+            coup=joueCoupIA(ttable,dam,joueur,4);
 
             if(coup<0){
                 i=-1;
@@ -81,10 +74,12 @@ void playerVSIA(int player)
 
     delete ttable;
     delete dam;
+
 }
 
-void IAVSIA()
+void IAVSIA(int prof)
 {
+
     //position initiale
     int setup[8][8]=
     {
@@ -98,20 +93,21 @@ void IAVSIA()
         {0,0,0,0,0,0,0,0},
     };
 
-    Damier* dam=new Damier(setup);
+    int cont[8][8]=
+    {
+        {3,5,5,5,5,5,5,3},
+        {5,8,8,8,8,8,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,8,8,8,8,8,5},
+        {3,5,5,5,5,5,5,3},
+    };
 
-    //seeds pour la fonction de hashage
-    int randvals[8][8][2];
-    srand (time(NULL));
-    for (int i(0);i<8;i++){
-        for(int j(0);j<8;j++){
-            for(int k(0);k<2;k++){
-                randvals[i][j][k]=rand();
-            }
-        }
-    }
+    Damier* dam=new Damier(setup,cont);
 
-    Table* ttable=new Table(randvals);
+    Table* ttable=new Table();
 
     int joueur=1;
     int i(0),j(0);
@@ -121,14 +117,13 @@ void IAVSIA()
 
         dam->affiche();
 
-        //profondeur de 8
         if(joueur==2){
-        printf("le rapide \n");
-        coup=joueCoupIA(randvals,ttable,dam,joueur,8);
+        printf("avec memoire \n");
+        coup=joueCoupIA(ttable,dam,joueur,prof);
         }
         else{
-            printf("le lent \n");
-            coup=joueCoupIA2(dam,joueur,8);
+            printf("sans memoire \n");
+            coup=joueCoupIA2(dam,joueur,prof);
         }
         if(coup<0){
             i=-1;
@@ -144,7 +139,7 @@ void IAVSIA()
         joueCoup(dam,joueur,i,j);
         joueur=3-joueur;
     }
-
+    dam->affiche();
     cout<<score(dam,2)<<"\n";
 
     delete ttable;

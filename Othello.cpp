@@ -1,5 +1,5 @@
 #include "Othello.h"
-
+#include <unistd.h>
 using namespace std;
 
 bool estValide(Damier* _damier,int joueur,int k,int l)
@@ -56,6 +56,37 @@ void joueCoup(Damier* _damier,int joueur, int k,int l)
 {
     //si on ne veut pas passer
     if(k>=0){
+
+        //mise a jour des cases contigues
+
+        if((k-1)>=0){
+            _damier->contigues[k-1][l]-=1;
+            if((l+1)<8){
+                _damier->contigues[k-1][l+1]-=1;
+            }
+        }
+        if((l-1)>=0){
+            _damier->contigues[k][l-1]-=1;
+            if((k-1)>=0){
+                _damier->contigues[k-1][l-1]-=1;
+            }
+
+        }
+        if((k+1)<8){
+
+            _damier->contigues[k+1][l]-=1;
+            if((l-1)>=0){
+                _damier->contigues[k+1][l-1]-=1;
+            }
+        }
+        if((l+1)<8){
+            _damier->contigues[k][l+1]-=1;
+            if((k+1)<8){
+                _damier->contigues[k+1][l+1]-=1;
+            }
+        }
+
+        _damier->nbpion++;
         _damier->setV(joueur,k,l);
         //on mange les pions
         int d[3]={-1,0,1};
