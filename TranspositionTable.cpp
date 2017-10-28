@@ -4,8 +4,8 @@ using namespace std;
 
 Table::Table(){
 
-    this->hashtable=new Noeud*[65536];
-    for(int i(0);i<65536;i++){
+    this->hashtable=new Noeud*[TABLE_SIZE];
+    for(int i(0);i<TABLE_SIZE;i++){
         //l'initialistation de distance à 255 permet de dire que le noeud est inexploré
         //(maximum 60coups dans une partie  => prof<=60
         this->hashtable[i]=new Noeud(255,MAXI,MINI);
@@ -14,22 +14,10 @@ Table::Table(){
 }
 
 Table::~Table(){
-    for(int i(0);i<65536;i++){
+    for(int i(0);i<TABLE_SIZE;i++){
         delete this->hashtable[i];
     }
     delete[] hashtable;
-}
-
-Noeud* Table::isIn(unsigned short cle){
-
-    //si le noeud est inexplore
-    if(this->hashtable[cle]->distance==255){
-        return NULL;
-    }
-    else{
-
-        return this->hashtable[cle];
-    }
 }
 
 Noeud::Noeud(char d,int vh, int vb){
@@ -38,10 +26,11 @@ Noeud::Noeud(char d,int vh, int vb){
     this->vhaute=vh;
     this->vbasse=vb;
     this->real_key=0;
+    this->mc=0;
 }
 
 
-unsigned int hashage(Damier* _damier)
+unsigned int hashage(Damier* damier)
 {
     static unsigned int seeds[8][8][2]=
     {
@@ -59,14 +48,12 @@ unsigned int hashage(Damier* _damier)
 
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
-            if(_damier->cases[i][j]!=0){
+            if(damier->getV(i,j)!=0){
                 //xor sur les positions permet de calculer les nouvelles cle facilement
-                res=res^(seeds[i][j][_damier->cases[i][j]]);
+                res=res^(seeds[i][j][damier->getV(i,j)]);
             }
-
         }
     }
-
     return res;
 }
 

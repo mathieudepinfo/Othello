@@ -19,15 +19,15 @@ int main(){
     unsigned int x;
     srand (time(NULL));
     int seeds[8][8][2];
-    for (int i(0);i<4;i++){
+    for (int i(0);i<8;i++){
 
-        for(int j(0);j<4;j++){
+        for(int j(0);j<8;j++){
             for(int k(0);k<2;k++){
                 x=(unsigned int)rand();
                 seeds[i][j][k]=x;
-                seeds[7-i][j][k]=x;
+                /*seeds[7-i][j][k]=x;
                 seeds[7-i][7-j][k]=x;
-                seeds[i][7-j][k]=x;
+                seeds[i][7-j][k]=x;*/
             }
         }
     }

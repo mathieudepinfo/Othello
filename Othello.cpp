@@ -2,7 +2,7 @@
 #include <unistd.h>
 using namespace std;
 
-bool estValide(Damier* _damier,int joueur,int k,int l)
+bool estValide(Damier* damier,int joueur,int k,int l)
 {
 
     //si on souhaite passer
@@ -10,7 +10,7 @@ bool estValide(Damier* _damier,int joueur,int k,int l)
 
         for(int i(0);i<8;i++){
             for(int j(0);j<8;j++){
-                if(estValide(_damier,joueur,i,j)){
+                if(estValide(damier,joueur,i,j)){
                     return false;
                 }
             }
@@ -18,8 +18,8 @@ bool estValide(Damier* _damier,int joueur,int k,int l)
         return true;
     }
 
-    //s'il y a deja n jeton sur la case
-    if(_damier->getV(k,l)==1 || _damier->getV(k,l)==2){
+    //s'il y a deja un jeton sur la case
+    if(damier->getV(k,l)==1 || damier->getV(k,l)==2){
         return false;
     }
 
@@ -33,15 +33,15 @@ bool estValide(Damier* _damier,int joueur,int k,int l)
 
                 //on parcours une direction, il faut qu'on trouve un pion adverse puis un pion allie
                 while(0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
-                   && _damier->getV(k+cpt*d[i],l+cpt*d[j])==3-joueur){
+                   && damier->getV(k+cpt*d[i],l+cpt*d[j])==3-joueur){
 
                     cpt++;
                     pion_adv=true; //on a rencontre un pion adverse
                 }
 
-                if(   0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
+                if(0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
                    && pion_adv
-                   && _damier->getV(k+cpt*d[i],l+cpt*d[j])==joueur){
+                   && damier->getV(k+cpt*d[i],l+cpt*d[j])==joueur){
 
                     return true;
                 }
@@ -52,7 +52,7 @@ bool estValide(Damier* _damier,int joueur,int k,int l)
     return false;
 }
 
-void joueCoup(Damier* _damier,int joueur, int k,int l)
+void joueCoup(Damier* damier,int joueur, int k,int l)
 {
     //si on ne veut pas passer
     if(k>=0){
@@ -60,34 +60,34 @@ void joueCoup(Damier* _damier,int joueur, int k,int l)
         //mise a jour des cases contigues
 
         if((k-1)>=0){
-            _damier->contigues[k-1][l]-=1;
+            damier->Cminus(k-1,l,1);
             if((l+1)<8){
-                _damier->contigues[k-1][l+1]-=1;
+                damier->Cminus(k-1,l+1,1);
             }
         }
         if((l-1)>=0){
-            _damier->contigues[k][l-1]-=1;
+            damier->Cminus(k,l-1,1);
             if((k-1)>=0){
-                _damier->contigues[k-1][l-1]-=1;
+                damier->Cminus(k-1,l-1,1);
             }
 
         }
         if((k+1)<8){
 
-            _damier->contigues[k+1][l]-=1;
+            damier->Cminus(k+1,l,1);
             if((l-1)>=0){
-                _damier->contigues[k+1][l-1]-=1;
+                damier->Cminus(k+1,l-1,1);
             }
         }
         if((l+1)<8){
-            _damier->contigues[k][l+1]-=1;
+            damier->Cminus(k,l+1,1);
             if((k+1)<8){
-                _damier->contigues[k+1][l+1]-=1;
+                damier->Cminus(k+1,l+1,1);
             }
         }
 
-        _damier->nbpion++;
-        _damier->setV(joueur,k,l);
+        damier->iNp();
+        damier->setV(joueur,k,l);
         //on mange les pions
         int d[3]={-1,0,1};
         for(int i(0);i<3;i++){
@@ -99,17 +99,17 @@ void joueCoup(Damier* _damier,int joueur, int k,int l)
 
                     //on parcours une direction, il faut qu'on trouve un pion adverse puis un pion allie
                     while( 0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
-                        && _damier->getV(k+cpt*d[i],l+cpt*d[j])==3-joueur){
+                        && damier->getV(k+cpt*d[i],l+cpt*d[j])==3-joueur){
                         cpt++;
                         p_adv=true;
                     }
 
                     if(0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
                     && p_adv
-                    && _damier->getV(k+cpt*d[i],l+cpt*d[j])==joueur){
+                    && damier->getV(k+cpt*d[i],l+cpt*d[j])==joueur){
                         for(int m(1);m<cpt;m++){ //on mange tous les pions rencontres
 
-                            _damier->setV(joueur,k+m*d[i],l+m*d[j]);
+                            damier->setV(joueur,k+m*d[i],l+m*d[j]);
                         }
                     }
                 }
@@ -119,13 +119,13 @@ void joueCoup(Damier* _damier,int joueur, int k,int l)
 
 }
 
-bool testFin(Damier* _damier)
+bool testFin(Damier* damier)
 {
     for(int joueur(1);joueur<3;joueur++){
         for(int i(0);i<8;i++){
             for(int j(0);j<8;j++){
                 //si le moindre coup est possible on a pas fini
-                if(estValide(_damier,joueur,i,j)){
+                if(estValide(damier,joueur,i,j)){
                     return false;
                 }
             }
@@ -134,13 +134,13 @@ bool testFin(Damier* _damier)
     return true;
 }
 
-int score(Damier* _damier, int joueur)
+int score(Damier* damier, int joueur)
 {
     int cpt(0);
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
 
-            if(_damier->cases[i][j]==joueur){
+            if(damier->getV(i,j)==joueur){
                     cpt++;
             }
         }

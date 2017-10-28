@@ -55,7 +55,7 @@ void playerVSIA(int player)
         }
         else{
             //profondeur de 4
-            coup=joueCoupIA(ttable,dam,joueur,4);
+            coup=joueCoupIA2(dam,joueur,4);
 
             if(coup<0){
                 i=-1;
@@ -106,35 +106,42 @@ void IAVSIA(int prof)
     };
 
     Damier* dam=new Damier(setup,cont);
-
+    cout<<heuristique(dam,1)<<" "<<heuristique(dam,2)<<"\n";
     Table* ttable=new Table();
+    Table* ttable2=new Table();
 
     int joueur=1;
     int i(0),j(0);
-    int coup(0);
+    int c(0);
+
     string s;
     while(!testFin(dam)){
 
         dam->affiche();
 
-        if(joueur==2){
+        if(joueur==1){
         printf("avec memoire \n");
-        coup=joueCoupIA(ttable,dam,joueur,prof);
+        alphaBeta(ttable,dam,joueur,prof,MINI,MAXI);
+        c=(*ttable)[hashage(dam)]->mc;
         }
         else{
-            printf("sans memoire \n");
-            coup=joueCoupIA2(dam,joueur,prof);
+            printf("MTD \n");
+            MTD(0,ttable2,dam,joueur,prof);
+            c=(*ttable2)[hashage(dam)]->mc;
         }
-        if(coup<0){
+        if(c<0){
             i=-1;
             j=0;
         }
         else{
-            i=coup/10;
-            j=coup%10;
+            i=c/10;
+            j=c%10;
         }
 
-
+        if(!estValide(dam,joueur,i,j)){
+            printf("erreur");
+            return ;
+        }
         cout<< i<<" "<<j<<" "<<joueur<<"\n";
         joueCoup(dam,joueur,i,j);
         joueur=3-joueur;

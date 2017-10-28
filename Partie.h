@@ -8,6 +8,8 @@
 #include "IA_main.h"
 #include "TranspositionTable.h"
 #include "IA_ab.h"
+#include "IA_MTDf.h"
+
 /**
   *@brief lance une partie joueur contre IA
   *@param player est le joueur humain(1 ou 2)
