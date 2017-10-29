@@ -1,7 +1,6 @@
 #include "Partie.h"
 
 using namespace std;
-
 void playerVSIA(int player)
 {
     //position initiale
@@ -16,32 +15,26 @@ void playerVSIA(int player)
         {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
     };
+    int cont[8][8]=
+    {
+        {3,5,5,5,5,5,5,3},
+        {5,8,8,8,8,8,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,8,8,8,8,8,5},
+        {3,5,5,5,5,5,5,3},
+    };
 
-    Damier* dam=new Damier(setup);
-
-    //seeds pour la fonction de hashage, rotations=meme cle
-    int randvals[8][8][2];
-    int x;
-    srand (time(NULL));
-    for (int i(0);i<4;i++){
-        for(int j(0);j<4;j++){
-            for(int k(0);k<2;k++){
-                x=rand();
-                randvals[i][j][k]=x;
-                randvals[7-i][j][k]=x;
-                randvals[7-i][7-j][k]=x;
-                randvals[i][7-j][k]=x;
-            }
-        }
-    }
-
-    Table* ttable=new Table(randvals);
+    Damier* dam=new Damier(setup,cont);
+    Table* ttable=new Table();
 
     int joueur=1;
     int i(0),j(0);
     int coup(0);
     string s;
-    while(!testFin(dam)){
+    while(!testFin(*dam)){
 
         dam->affiche();
         if(joueur==player){
@@ -57,12 +50,12 @@ void playerVSIA(int player)
                     j=coup%10;
                 }
 
-            }while(!estValide(dam,joueur,i,j));
+            }while(!estValide(*dam,joueur,i,j));
 
         }
         else{
             //profondeur de 4
-            coup=joueCoupIA(randvals,ttable,dam,joueur,4);
+            coup=joueCoupIA2(*dam,joueur,4);
 
             if(coup<0){
                 i=-1;
@@ -75,16 +68,18 @@ void playerVSIA(int player)
         }
 
         cout<< i<<" "<<j<<" "<<joueur<<"\n";
-        joueCoup(dam,joueur,i,j);
+        joueCoup(*dam,joueur,i,j);
         joueur=3-joueur;
     }
 
     delete ttable;
     delete dam;
+
 }
 
-void IAVSIA()
+void IAVSIA(int prof)
 {
+
     //position initiale
     int setup[8][8]=
     {
@@ -98,54 +93,61 @@ void IAVSIA()
         {0,0,0,0,0,0,0,0},
     };
 
-    Damier* dam=new Damier(setup);
+    int cont[8][8]=
+    {
+        {3,5,5,5,5,5,5,3},
+        {5,8,8,8,8,8,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,6,5,5,6,8,5},
+        {5,8,7,6,6,7,8,5},
+        {5,8,8,8,8,8,8,5},
+        {3,5,5,5,5,5,5,3},
+    };
 
-    //seeds pour la fonction de hashage
-    int randvals[8][8][2];
-    srand (time(NULL));
-    for (int i(0);i<8;i++){
-        for(int j(0);j<8;j++){
-            for(int k(0);k<2;k++){
-                randvals[i][j][k]=rand();
-            }
-        }
-    }
-
-    Table* ttable=new Table(randvals);
+    Damier* dam=new Damier(setup,cont);
+    cout<<heuristique(*dam,1)<<" "<<heuristique(*dam,2)<<"\n";
+    Table* ttable=new Table();
+    Table* ttable2=new Table();
 
     int joueur=1;
     int i(0),j(0);
-    int coup(0);
+    int c(0);
+
     string s;
-    while(!testFin(dam)){
+    while(!testFin(*dam)){
 
         dam->affiche();
 
-        //profondeur de 8
-        if(joueur==2){
-        printf("le rapide \n");
-        coup=joueCoupIA(randvals,ttable,dam,joueur,8);
+        if(joueur==1){
+        printf("avec memoire \n");
+        alphaBeta(*ttable,*dam,joueur,prof,MINI,MAXI);
+        c=(*ttable)[hashage(*dam)]->mc;
         }
         else{
-            printf("le lent \n");
-            coup=joueCoupIA2(dam,joueur,8);
+            printf("MTD \n");
+            MTD(0,*ttable2,*dam,joueur,prof);
+            c=(*ttable2)[hashage(*dam)]->mc;
         }
-        if(coup<0){
+        if(c<0){
             i=-1;
             j=0;
         }
         else{
-            i=coup/10;
-            j=coup%10;
+            i=c/10;
+            j=c%10;
         }
 
-
+        if(!estValide(*dam,joueur,i,j)){
+            printf("erreur");
+            return ;
+        }
         cout<< i<<" "<<j<<" "<<joueur<<"\n";
-        joueCoup(dam,joueur,i,j);
+        joueCoup(*dam,joueur,i,j);
         joueur=3-joueur;
     }
-
-    cout<<score(dam,2)<<"\n";
+    dam->affiche();
+    cout<<score(*dam,2)<<"\n";
 
     delete ttable;
     delete dam;

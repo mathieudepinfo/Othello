@@ -2,50 +2,58 @@
 
 using namespace std;
 
-Table::Table(int randvals[8][8][2]){
+Table::Table(){
 
-    hashtable=new Noeud*[65536];
-    for(int i(0);i<65536;i++){
+    this->hashtable=new Noeud*[TABLE_SIZE];
+    for(int i(0);i<TABLE_SIZE;i++){
         //l'initialistation de distance à 255 permet de dire que le noeud est inexploré
         //(maximum 60coups dans une partie  => prof<=60
-        hashtable[i]=new Noeud(255,MAXI,MINI);
+        this->hashtable[i]=new Noeud(255,MAXI,MINI);
     }
 
 }
 
-Noeud* Table::isIn(unsigned short cle){
-
-    //si le noeud est inexplore
-    if(hashtable[cle]->distance==255){
-        return NULL;
+Table::~Table(){
+    for(int i(0);i<TABLE_SIZE;i++){
+        delete this->hashtable[i];
     }
-    else{
-
-        return hashtable[cle];
-    }
+    delete[] hashtable;
 }
 
 Noeud::Noeud(char d,int vh, int vb){
 
-    distance=d;
-    vhaute=vh;
-    vbasse=vb;
-    real_key=0;
+    this->distance=d;
+    this->vhaute=vh;
+    this->vbasse=vb;
+    this->real_key=0;
+    this->mc=0;
 }
 
-unsigned int hashage(Damier* _damier,int randvals[8][8][2])
+
+unsigned int hashage(Damier& damier)
 {
+    static unsigned int seeds[8][8][2]=
+    {
+        {{1656079727,610232524},{125089092,1628998920},{1703760725,882565151},{1639394878,297003772},{1639394878,297003772},{1703760725,882565151},{125089092,1628998920},{1656079727,610232524}},
+        {{2040827370,1777021370},{1711502556,270090525},{509792504,1696582105},{1268973679,26043505},{1268973679,26043505},{509792504,1696582105},{1711502556,270090525},{2040827370,1777021370}},
+        {{649878854,219511193},{1772825616,1068657239},{1328008765,1775057571},{145143634,1494748382},{145143634,1494748382},{1328008765,1775057571},{1772825616,1068657239},{649878854,219511193}},
+        {{428033047,1053798443},{1511077093,270634401},{272207812,595093729},{921752792,1928287539},{921752792,1928287539},{272207812,595093729},{1511077093,270634401},{428033047,1053798443}},
+        {{428033047,1053798443},{1511077093,270634401},{272207812,595093729},{921752792,1928287539},{921752792,1928287539},{272207812,595093729},{1511077093,270634401},{428033047,1053798443}},
+        {{649878854,219511193},{1772825616,1068657239},{1328008765,1775057571},{145143634,1494748382},{145143634,1494748382},{1328008765,1775057571},{1772825616,1068657239},{649878854,219511193}},
+        {{2040827370,1777021370},{1711502556,270090525},{509792504,1696582105},{1268973679,26043505},{1268973679,26043505},{509792504,1696582105},{1711502556,270090525},{2040827370,1777021370}},
+        {{1656079727,610232524},{125089092,1628998920},{1703760725,882565151},{1639394878,297003772},{1639394878,297003772},{1703760725,882565151},{125089092,1628998920},{1656079727,610232524}},
+    };
+
     unsigned int res=0;
+
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
-            if(_damier->cases[i][j]!=0){
+            if(damier.getV(i,j)!=0){
                 //xor sur les positions permet de calculer les nouvelles cle facilement
-                res=res^(randvals[i][j][_damier->cases[i][j]]);
+                res=res^(seeds[i][j][damier.getV(i,j)]);
             }
-
         }
     }
-
     return res;
 }
 

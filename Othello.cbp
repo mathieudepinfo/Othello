@@ -34,12 +34,16 @@
 		</Compiler>
 		<Unit filename="Damier.cpp" />
 		<Unit filename="Damier.h" />
+		<Unit filename="IA_MTDf.cpp" />
+		<Unit filename="IA_MTDf.h" />
 		<Unit filename="IA_ab.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="IA_ab.h" />
 		<Unit filename="IA_main.cpp" />
 		<Unit filename="IA_main.h" />
+		<Unit filename="Interface.cpp" />
+		<Unit filename="Interface.h" />
 		<Unit filename="Othello.cpp" />
 		<Unit filename="Othello.h" />
 		<Unit filename="Partie.cpp" />
