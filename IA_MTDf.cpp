@@ -1,6 +1,6 @@
 #include "IA_MTDf.h"
 
-int MTD(int f,Table* ttable,Damier* root,int joueur,char prof)
+int MTD(int f,Table& ttable,Damier& root,int joueur,char prof)
 {
     int val=f;
     int haute=MAXI;
@@ -31,12 +31,12 @@ int MTD(int f,Table* ttable,Damier* root,int joueur,char prof)
     return val;
 }
 
-void update(Table* ttable){
+void update(Table& ttable){
 
 
     for(int i(0);i<TABLE_SIZE;i++){
-        if((*ttable)[i]->distance!=255 && (*ttable)[i]->vhaute!=(*ttable)[i]->vbasse){
-            (*ttable)[i]->distance=255;
+        if(ttable[i]->distance!=255 && ttable[i]->vhaute!=ttable[i]->vbasse){
+            ttable[i]->distance=255;
         }
     }
 }

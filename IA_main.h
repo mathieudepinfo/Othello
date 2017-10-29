@@ -19,7 +19,7 @@ inline int mini(int a,int b){
   *@brief permet d'evaluer la valeur d'une position
   *@return valeur de la position
 */
-int heuristique(Damier* damier,int joueur);
+int heuristique(Damier& damier,int joueur);
 
 /**
   *@brief algorithme alpha-beta avec memoire
@@ -32,7 +32,7 @@ int heuristique(Damier* damier,int joueur);
           maxnode permet de differencier noeuds min et max (pas d'implementation Negamax)
   *@return valeur strategique de la racine
 */
-int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int beta,bool maxnode=true);
+int alphaBeta(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,bool maxnode=true);
 
 /**
   *@brief identique a alphabeta sauf pour le return

@@ -3,36 +3,28 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 46.22      6.13     6.13 182047521     0.00     0.00  estValide(Damier*, int, int, int)
- 13.43      7.91     1.78 16888953     0.00     0.00  Damier::Damier(int (*) [8], int (*) [8])
-  9.36      9.15     1.24 1878347150     0.00     0.00  Damier::getV(int, int)
-  8.83     10.32     1.17 11835456     0.00     0.00  heuristique(Damier*, int)
-  7.06     11.26     0.94 16889011     0.00     0.00  joueCoup(Damier*, int, int, int)
-  7.02     12.19     0.93  5186561     0.00     0.00  alphaBeta(Table*, Damier*, int, char, int, int, bool)
-  3.17     12.61     0.42  6833445     0.00     0.00  hashage(Damier*)
-  2.34     12.92     0.31  1646855     0.00     0.00  alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1]
-  1.36     13.10     0.18  2515205     0.00     0.00  alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2]
-  0.53     13.17     0.07  7540092     0.00     0.00  alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1]
-  0.30     13.21     0.04                             frame_dummy
-  0.15     13.23     0.02 53359461     0.00     0.00  Damier::setV(int, int, int)
-  0.15     13.25     0.02 15080184     0.00     0.00  mini(int, int)
-  0.08     13.26     0.01  5030649     0.00     0.00  maxi(int, int)
-  0.08     13.27     0.01                             Noeud::Noeud(char, int, int)
-  0.00     13.27     0.00  1918427     0.00     0.00  testFin(Damier*)
-  0.00     13.27     0.00       60     0.00     0.00  Damier::affiche()
-  0.00     13.27     0.00       30     0.00   226.09  joueCoupIA2(Damier*, int, char)
-  0.00     13.27     0.00       29     0.00   221.95  joueCoupIA(Table*, Damier*, int, char)
-  0.00     13.27     0.00       29     0.00     0.00  Table::isIn(unsigned short)
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10alphaBeta2P6Damiericiib
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10playerVSIAi
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z4maxiii
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9estValideP6Damieriii
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN5TableC2Ev
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN6DamierC2EPA8_iS1_
-  0.00     13.27     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
-  0.00     13.27     0.00        1     0.00     0.00  score(Damier*, int)
-  0.00     13.27     0.00        1     0.00     0.00  Table::Table()
-  0.00     13.27     0.00        1     0.00     0.00  Table::~Table()
+ 51.64      3.22     3.22 197339543     0.00     0.00  menu(SDL_Window*)
+ 10.10      3.85     0.63  3411003     0.00     0.00  heuristique(Damier&, int)
+  8.98      4.41     0.56      828     0.68     7.39  alphaBeta(Table&, Damier&, int, char, int, int, bool)
+  7.94      4.91     0.50  5836860     0.00     0.00  joueCoup(Damier&, int, int, int)
+  6.74      5.33     0.42 91415332     0.00     0.00  estValide(Damier&, int, int, int)
+  6.25      5.72     0.39  5836799     0.00     0.00  Damier::Damier(Damier const&)
+  6.09      6.10     0.38  5837688     0.00     0.00  hashage(Damier&)
+  1.92      6.22     0.12       30     4.00   200.34  MTD(int, Table&, Damier&, int, char)
+  0.32      6.24     0.02  2417869     0.00     0.00  testFin(Damier&)
+  0.00      6.24     0.00       62     0.00     0.00  Damier::affiche()
+  0.00      6.24     0.00        2     0.00     0.00  Table::Table()
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10alphaBeta2R6Damiericiib
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z10playerVSIAi
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11heuristiqueR6Damieri
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z3MTDiR5TableR6Damieric
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9estValideR6Damieriii
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN5TableC2Ev
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN6Damier4initEPS_PA8_KiS3_
+  0.00      6.24     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
+  0.00      6.24     0.00        1     0.00     0.00  score(Damier&, int)
+  0.00      6.24     0.00        1     0.00     0.00  Table::~Table()
+  0.00      6.24     0.00        1     0.00     0.00  Damier::Damier(int const (*) [8], int const (*) [8])
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -70,190 +62,111 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.08% of 13.27 seconds
+granularity: each sample hit covers 2 byte(s) for 0.16% of 6.24 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     99.6    0.00   13.22                 IAVSIA(int) [1]
-                0.00    6.78      30/30          joueCoupIA2(Damier*, int, char) [3]
-                0.00    6.44      29/29          joueCoupIA(Table*, Damier*, int, char) [5]
-                0.00    0.00      60/1918427     testFin(Damier*) [15]
-                0.00    0.00      59/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.00    0.00       1/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.00    0.00      60/60          Damier::affiche() [28]
-                0.00    0.00       1/1           Table::Table() [38]
-                0.00    0.00       1/1           score(Damier*, int) [37]
-                0.00    0.00       1/1           Table::~Table() [39]
+[1]    100.0    0.00    6.24                 IAVSIA(int) [1]
+                0.12    5.89      30/30          MTD(int, Table&, Damier&, int, char) [3]
+                0.02    0.21      31/828         alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+                0.00    0.00      62/2417869     testFin(Damier&) [10]
+                0.00    0.00      61/5836860     joueCoup(Damier&, int, int, int) [7]
+                0.00    0.00      61/5837688     hashage(Damier&) [9]
+                0.00    0.00      61/91415332     estValide(Damier&, int, int, int) [5]
+                0.00    0.00      60/197339543     menu(SDL_Window*) [4]
+                0.00    0.00       2/3411003     heuristique(Damier&, int) [6]
+                0.00    0.00      62/62          Damier::affiche() [18]
+                0.00    0.00       2/2           Table::Table() [19]
+                0.00    0.00       1/1           Damier::Damier(int const (*) [8], int const (*) [8]) [30]
+                0.00    0.00       1/1           score(Damier&, int) [28]
+                0.00    0.00       1/1           Table::~Table() [29]
 -----------------------------------------------
-                             221032600             estValide(Damier*, int, int, int) [2]
-                0.00    0.00    2088/182047521     joueCoupIA(Table*, Damier*, int, char) [5]
-                0.00    0.00   13471/182047521     joueCoupIA2(Damier*, int, char) [3]
-                0.39    0.07 11698805/182047521     testFin(Damier*) [15]
-                0.52    0.09 15302174/182047521     alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                0.72    0.13 21252887/182047521     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-                1.75    0.32 51961083/182047521     alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                2.75    0.50 81817013/182047521     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-[2]     54.6    6.13    1.11 182047521+221032600 estValide(Damier*, int, int, int) [2]
-                1.11    0.00 1681448039/1878347150     Damier::getV(int, int) [12]
-                             221032600             estValide(Damier*, int, int, int) [2]
+                             5836799             alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+                0.02    0.21      31/828         IAVSIA(int) [1]
+                0.54    5.35     797/828         MTD(int, Table&, Damier&, int, char) [3]
+[2]     98.1    0.56    5.56     828+5836799 alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+                0.42    2.34 91415271/91415332     estValide(Damier&, int, int, int) [5]
+                0.63    0.00 3411001/3411003     heuristique(Damier&, int) [6]
+                0.56    0.00 34486665/197339543     menu(SDL_Window*) [4]
+                0.50    0.00 5836799/5836860     joueCoup(Damier&, int, int, int) [7]
+                0.39    0.00 5836799/5836799     Damier::Damier(Damier const&) [8]
+                0.38    0.00 5837627/5837688     hashage(Damier&) [9]
+                0.02    0.32 2417807/2417869     testFin(Damier&) [10]
+                             5836799             alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
 -----------------------------------------------
-                0.00    6.78      30/30          IAVSIA(int) [1]
-[3]     51.1    0.00    6.78      30         joueCoupIA2(Damier*, int, char) [3]
-                0.25    6.53    1114/1114        alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-                0.00    0.00   13471/182047521     estValide(Damier*, int, int, int) [2]
-                0.00    0.00    1353/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.00    0.00    1353/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.00    0.00    2228/15080184     mini(int, int) [18]
-                0.00    0.00     239/5030649     maxi(int, int) [20]
+                0.12    5.89      30/30          IAVSIA(int) [1]
+[3]     96.3    0.12    5.89      30         MTD(int, Table&, Damier&, int, char) [3]
+                0.54    5.35     797/828         alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
 -----------------------------------------------
-[4]     51.1    0.25    6.53    1114+10054183 <cycle 2 as a whole> [4]
-                0.18    5.25 2515205             alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-                0.07    1.28 7540092             alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
+                0.00    0.00      60/197339543     IAVSIA(int) [1]
+                0.32    0.00 19661875/197339543     testFin(Damier&) [10]
+                0.56    0.00 34486665/197339543     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+                2.34    0.00 143190943/197339543     estValide(Damier&, int, int, int) [5]
+[4]     51.6    3.22    0.00 197339543         menu(SDL_Window*) [4]
 -----------------------------------------------
-                0.00    6.44      29/29          IAVSIA(int) [1]
-[5]     48.5    0.00    6.44      29         joueCoupIA(Table*, Damier*, int, char) [5]
-                1.24    5.20     214/214         alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                0.00    0.00    2088/182047521     estValide(Damier*, int, int, int) [2]
-                0.00    0.00     214/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.00    0.00     214/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.00    0.00      29/6833445     hashage(Damier*) [16]
-                0.00    0.00      29/29          Table::isIn(unsigned short) [29]
+                0.00    0.00      61/91415332     IAVSIA(int) [1]
+                0.42    2.34 91415271/91415332     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+[5]     44.2    0.42    2.34 91415332         estValide(Damier&, int, int, int) [5]
+                2.34    0.00 143190943/197339543     menu(SDL_Window*) [4]
 -----------------------------------------------
-[6]     48.5    1.24    5.20     214+6833202 <cycle 1 as a whole> [6]
-                0.31    3.90 1646855             alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                0.93    1.30 5186561             alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
+                0.00    0.00       2/3411003     IAVSIA(int) [1]
+                0.63    0.00 3411001/3411003     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+[6]     10.1    0.63    0.00 3411003         heuristique(Damier&, int) [6]
 -----------------------------------------------
-                             2515205             alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-[7]     40.9    0.18    5.25 2515205         alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-                2.75    0.50 81817013/182047521     estValide(Damier*, int, int, int) [2]
-                0.80    0.00 7538978/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.70    0.00 7034951/11835456     heuristique(Damier*, int) [13]
-                0.42    0.07 7538978/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.02    0.00 15077956/15080184     mini(int, int) [18]
-                             7538978             alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
+                0.00    0.00      61/5836860     IAVSIA(int) [1]
+                0.50    0.00 5836799/5836860     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+[7]      7.9    0.50    0.00 5836860         joueCoup(Damier&, int, int, int) [7]
 -----------------------------------------------
-                             1646641             alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                1.24    5.20     214/214         joueCoupIA(Table*, Damier*, int, char) [5]
-[8]     31.7    0.31    3.90 1646855         alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                1.75    0.32 51961083/182047521     estValide(Damier*, int, int, int) [2]
-                0.55    0.00 5186561/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.47    0.00 4800454/11835456     heuristique(Damier*, int) [13]
-                0.00    0.38 1554138/1918427     testFin(Damier*) [15]
-                0.29    0.05 5186561/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.10    0.00 1646855/6833445     hashage(Damier*) [16]
-                             5186561             alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
+                0.39    0.00 5836799/5836799     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+[8]      6.3    0.39    0.00 5836799         Damier::Damier(Damier const&) [8]
 -----------------------------------------------
-                             5186561             alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-[9]     16.8    0.93    1.30 5186561         alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                0.52    0.09 15302174/182047521     estValide(Damier*, int, int, int) [2]
-                0.32    0.00 5186561/6833445     hashage(Damier*) [16]
-                0.17    0.00 1646641/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.09    0.01 1646641/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.00    0.09  364229/1918427     testFin(Damier*) [15]
-                0.00    0.00      51/11835456     heuristique(Damier*, int) [13]
-                             1646641             alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
+                0.00    0.00      61/5837688     IAVSIA(int) [1]
+                0.38    0.00 5837627/5837688     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+[9]      6.1    0.38    0.00 5837688         hashage(Damier&) [9]
 -----------------------------------------------
-                0.00    0.00       1/16888953     IAVSIA(int) [1]
-                0.00    0.00     214/16888953     joueCoupIA(Table*, Damier*, int, char) [5]
-                0.00    0.00    1353/16888953     joueCoupIA2(Damier*, int, char) [3]
-                0.17    0.00 1646641/16888953     alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                0.27    0.00 2515205/16888953     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-                0.55    0.00 5186561/16888953     alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                0.80    0.00 7538978/16888953     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-[10]    13.4    1.78    0.00 16888953         Damier::Damier(int (*) [8], int (*) [8]) [10]
+                0.00    0.00      62/2417869     IAVSIA(int) [1]
+                0.02    0.32 2417807/2417869     alphaBeta(Table&, Damier&, int, char, int, int, bool) [2]
+[10]     5.5    0.02    0.32 2417869         testFin(Damier&) [10]
+                0.32    0.00 19661875/197339543     menu(SDL_Window*) [4]
 -----------------------------------------------
-                             7538978             alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-                0.25    6.53    1114/1114        joueCoupIA2(Damier*, int, char) [3]
-[11]    10.2    0.07    1.28 7540092         alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-                0.72    0.13 21252887/182047521     estValide(Damier*, int, int, int) [2]
-                0.27    0.00 2515205/16888953     Damier::Damier(int (*) [8], int (*) [8]) [10]
-                0.14    0.02 2515205/16889011     joueCoup(Damier*, int, int, int) [14]
-                0.01    0.00 5030410/5030649     maxi(int, int) [20]
-                             2515205             alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
+                0.00    0.00      62/62          IAVSIA(int) [1]
+[18]     0.0    0.00    0.00      62         Damier::affiche() [18]
 -----------------------------------------------
-                0.13    0.00 196899111/1878347150     joueCoup(Damier*, int, int, int) [14]
-                1.11    0.00 1681448039/1878347150     estValide(Damier*, int, int, int) [2]
-[12]     9.4    1.24    0.00 1878347150         Damier::getV(int, int) [12]
+                0.00    0.00       2/2           IAVSIA(int) [1]
+[19]     0.0    0.00    0.00       2         Table::Table() [19]
 -----------------------------------------------
-                0.00    0.00      51/11835456     alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                0.47    0.00 4800454/11835456     alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                0.70    0.00 7034951/11835456     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-[13]     8.8    1.17    0.00 11835456         heuristique(Damier*, int) [13]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[20]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10alphaBeta2R6Damiericiib [20]
 -----------------------------------------------
-                0.00    0.00      59/16889011     IAVSIA(int) [1]
-                0.00    0.00     214/16889011     joueCoupIA(Table*, Damier*, int, char) [5]
-                0.00    0.00    1353/16889011     joueCoupIA2(Damier*, int, char) [3]
-                0.09    0.01 1646641/16889011     alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                0.14    0.02 2515205/16889011     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-                0.29    0.05 5186561/16889011     alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                0.42    0.07 7538978/16889011     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-[14]     8.2    0.94    0.15 16889011         joueCoup(Damier*, int, int, int) [14]
-                0.13    0.00 196899111/1878347150     Damier::getV(int, int) [12]
-                0.02    0.00 53359461/53359461     Damier::setV(int, int, int) [19]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[21]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10playerVSIAi [21]
 -----------------------------------------------
-                0.00    0.00      60/1918427     IAVSIA(int) [1]
-                0.00    0.09  364229/1918427     alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-                0.00    0.38 1554138/1918427     alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-[15]     3.5    0.00    0.47 1918427         testFin(Damier*) [15]
-                0.39    0.07 11698805/182047521     estValide(Damier*, int, int, int) [2]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[22]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11heuristiqueR6Damieri [22]
 -----------------------------------------------
-                0.00    0.00      29/6833445     joueCoupIA(Table*, Damier*, int, char) [5]
-                0.10    0.00 1646855/6833445     alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 1> [8]
-                0.32    0.00 5186561/6833445     alphaBeta(Table*, Damier*, int, char, int, int, bool) <cycle 1> [9]
-[16]     3.2    0.42    0.00 6833445         hashage(Damier*) [16]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[23]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z3MTDiR5TableR6Damieric [23]
 -----------------------------------------------
-                                                 <spontaneous>
-[17]     0.3    0.04    0.00                 frame_dummy [17]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[24]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9estValideR6Damieriii [24]
 -----------------------------------------------
-                0.00    0.00    2228/15080184     joueCoupIA2(Damier*, int, char) [3]
-                0.02    0.00 15077956/15080184     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] <cycle 2> [7]
-[18]     0.2    0.02    0.00 15080184         mini(int, int) [18]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[25]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN5TableC2Ev [25]
 -----------------------------------------------
-                0.02    0.00 53359461/53359461     joueCoup(Damier*, int, int, int) [14]
-[19]     0.2    0.02    0.00 53359461         Damier::setV(int, int, int) [19]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[26]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN6Damier4initEPS_PA8_KiS3_ [26]
 -----------------------------------------------
-                0.00    0.00     239/5030649     joueCoupIA2(Damier*, int, char) [3]
-                0.01    0.00 5030410/5030649     alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] <cycle 2> [11]
-[20]     0.1    0.01    0.00 5030649         maxi(int, int) [20]
------------------------------------------------
-                                                 <spontaneous>
-[21]     0.1    0.01    0.00                 Noeud::Noeud(char, int, int) [21]
------------------------------------------------
-                0.00    0.00      60/60          IAVSIA(int) [1]
-[28]     0.0    0.00    0.00      60         Damier::affiche() [28]
------------------------------------------------
-                0.00    0.00      29/29          joueCoupIA(Table*, Damier*, int, char) [5]
-[29]     0.0    0.00    0.00      29         Table::isIn(unsigned short) [29]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[30]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10alphaBeta2P6Damiericiib [30]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[31]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z10playerVSIAi [31]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[32]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z4maxiii [32]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[33]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9estValideP6Damieriii [33]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[34]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN5TableC2Ev [34]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[35]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN6DamierC2EPA8_iS1_ [35]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [48]
-[36]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [36]
+                0.00    0.00       1/1           __libc_csu_init [46]
+[27]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [27]
 -----------------------------------------------
                 0.00    0.00       1/1           IAVSIA(int) [1]
-[37]     0.0    0.00    0.00       1         score(Damier*, int) [37]
+[28]     0.0    0.00    0.00       1         score(Damier&, int) [28]
 -----------------------------------------------
                 0.00    0.00       1/1           IAVSIA(int) [1]
-[38]     0.0    0.00    0.00       1         Table::Table() [38]
+[29]     0.0    0.00    0.00       1         Table::~Table() [29]
 -----------------------------------------------
                 0.00    0.00       1/1           IAVSIA(int) [1]
-[39]     0.0    0.00    0.00       1         Table::~Table() [39]
+[30]     0.0    0.00    0.00       1         Damier::Damier(int const (*) [8], int const (*) [8]) [30]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -346,14 +259,11 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [30] _GLOBAL__sub_I__Z10alphaBeta2P6Damiericiib [3] joueCoupIA2(Damier*, int, char) [29] Table::isIn(unsigned short)
-  [31] _GLOBAL__sub_I__Z10playerVSIAi [20] maxi(int, int) [38] Table::Table()
-  [32] _GLOBAL__sub_I__Z4maxiii [18] mini(int, int)       [39] Table::~Table()
-  [33] _GLOBAL__sub_I__Z9estValideP6Damieriii [37] score(Damier*, int) [12] Damier::getV(int, int)
-  [34] _GLOBAL__sub_I__ZN5TableC2Ev [16] hashage(Damier*) [19] Damier::setV(int, int, int)
-  [35] _GLOBAL__sub_I__ZN6DamierC2EPA8_iS1_ [15] testFin(Damier*) [28] Damier::affiche()
-  [36] _GLOBAL__sub_I_main    [14] joueCoup(Damier*, int, int, int) [10] Damier::Damier(int (*) [8], int (*) [8])
-  [11] alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.1] [9] alphaBeta(Table*, Damier*, int, char, int, int, bool) [17] frame_dummy
-   [7] alphaBeta2(Damier*, int, char, int, int, bool) [clone .constprop.2] [8] alphaBeta(Table*, Damier*, int, char, int, int, bool) [clone .constprop.1] [6] <cycle 1>
-   [5] joueCoupIA(Table*, Damier*, int, char) [2] estValide(Damier*, int, int, int) [4] <cycle 2>
-  [13] heuristique(Damier*, int) [21] Noeud::Noeud(char, int, int)
+  [20] _GLOBAL__sub_I__Z10alphaBeta2R6Damiericiib [6] heuristique(Damier&, int) [5] estValide(Damier&, int, int, int)
+  [21] _GLOBAL__sub_I__Z10playerVSIAi [3] MTD(int, Table&, Damier&, int, char) [19] Table::Table()
+  [22] _GLOBAL__sub_I__Z11heuristiqueR6Damieri [4] menu(SDL_Window*) [29] Table::~Table()
+  [23] _GLOBAL__sub_I__Z3MTDiR5TableR6Damieric [28] score(Damier&, int) [18] Damier::affiche()
+  [24] _GLOBAL__sub_I__Z9estValideR6Damieriii [9] hashage(Damier&) [30] Damier::Damier(int const (*) [8], int const (*) [8])
+  [25] _GLOBAL__sub_I__ZN5TableC2Ev [10] testFin(Damier&)  [8] Damier::Damier(Damier const&)
+  [26] _GLOBAL__sub_I__ZN6Damier4initEPS_PA8_KiS3_ [7] joueCoup(Damier&, int, int, int)
+  [27] _GLOBAL__sub_I_main     [2] alphaBeta(Table&, Damier&, int, char, int, int, bool)

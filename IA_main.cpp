@@ -3,10 +3,10 @@
 
 using namespace std;
 
-int heuristique(Damier* damier,int joueur)
+int heuristique(Damier& damier,int joueur)
 {
     int s(0);
-    if(damier->getNp()<50){
+    if(damier.getNp()<50){
         int points[8][8]={
             { 500 ,-150, 30, 10, 10, 30,-150, 500},
             {-150 ,-250,  0,  0,  0,  0,-250,-150},
@@ -19,42 +19,42 @@ int heuristique(Damier* damier,int joueur)
             };
 
         //controlecoin
-        if(damier->getV(0,0)==joueur){
+        if(damier.getV(0,0)==joueur){
             points[0][1]=50;points[1][0]=50;points[1][1]=0;points[0][2]=10;points[2][0]=10;
 
         }
-        else if(damier->getV(0,0)==3-joueur){
+        else if(damier.getV(0,0)==3-joueur){
             points[0][1]=10;points[1][0]=10;points[1][1]=0;points[0][2]=10;points[2][0]=10;
         }
-        if(damier->getV(7,0)==joueur){
+        if(damier.getV(7,0)==joueur){
             points[7][1]=50;points[6][0]=50;points[6][1]=0;points[7][2]=10;points[5][0]=10;
         }
-        else if(damier->getV(7,0)==3-joueur){
+        else if(damier.getV(7,0)==3-joueur){
             points[7][1]=10;points[6][0]=10;points[6][1]=0;points[7][2]=10;points[5][0]=10;
         }
-        if(damier->getV(7,7)==joueur){
+        if(damier.getV(7,7)==joueur){
             points[7][6]=50;points[6][7]=50;points[6][6]=0;points[5][7]=10;points[7][5]=10;
         }
-        else if(damier->getV(7,7)==3-joueur){
+        else if(damier.getV(7,7)==3-joueur){
             points[7][6]=10;points[6][7]=10;points[6][6]=0;points[5][7]=10;points[7][5]=10;
         }
-        if(damier->getV(0,7)==joueur){
+        if(damier.getV(0,7)==joueur){
             points[0][6]=50;points[1][7]=50;points[1][6]=0;points[5][0]=10;points[2][7]=10;
         }
-        else if(damier->getV(0,7)==3-joueur){
+        else if(damier.getV(0,7)==3-joueur){
             points[0][6]=10;points[1][7]=10;points[1][6]=0;points[5][0]=10;points[2][7]=10;
         }
 
         //mobilite + calcul du score
         for(int i(0);i<8;i++){
             for(int j(0);j<8;j++){
-                if(damier->getV(i,j)==joueur){
+                if(damier.getV(i,j)==joueur){
                     s+=points[i][j];
-                    s-=damier->getC(i,j);
+                    s-=damier.getC(i,j);
                 }
-                else if(damier->getV(i,j)==3-joueur){
+                else if(damier.getV(i,j)==3-joueur){
                     s-=points[i][j];
-                    s+=damier->getC(i,j);
+                    s+=damier.getC(i,j);
                 }
             }
         }
@@ -63,7 +63,7 @@ int heuristique(Damier* damier,int joueur)
     else{
         for(int i(0);i<8;i++){
             for(int j(0);j<8;j++){
-                if(damier->getV(i,j)==joueur){
+                if(damier.getV(i,j)==joueur){
                     s+=1;
                 }
             }
@@ -72,7 +72,7 @@ int heuristique(Damier* damier,int joueur)
     return s;
 }
 
-int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int beta,bool maxnode)
+int alphaBeta(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,bool maxnode)
 {
     int val,v,meilleurcoup;
     //printf("ici1\n");
@@ -83,10 +83,10 @@ int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int be
     //printf("ici2 %d %d\n",prof,cle);
     //printf("ici2 %p %d\n",(*ttable)[0],0);
 
-    if(   (*ttable)[cle]->distance!=255
-       && (*ttable)[cle]->real_key==lcle){
+    if(   ttable[cle]->distance!=255
+       && ttable[cle]->real_key==lcle){
         //printf("bas\n");
-        Noeud* n=(*ttable)[cle];
+        Noeud* n=ttable[cle];
         //si la valeur de la table est valable a la profondeur actuelle
         if(n->distance>=prof){ //en fait cette condition n'est pas une inegalité car le nombre de pions est strictement croissant
 
@@ -118,9 +118,9 @@ int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int be
                 if(estValide(damier,joueur,i,j)){
 
                     if(val<beta){
-                        Damier* fils=new Damier(*damier);
-                        joueCoup(fils,joueur,i,j);
-                        v=alphaBeta(ttable,fils,joueur,prof-1,alpha,beta,false);
+                        Damier* fils=new Damier(damier);
+                        joueCoup(*fils,joueur,i,j);
+                        v=alphaBeta(ttable,*fils,joueur,prof-1,alpha,beta,false);
                         if(v>val){
                             val=v;
                             meilleurcoup=i*10+j;
@@ -132,7 +132,7 @@ int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int be
                         i=8;
                         j=8;
                         //on met a jour notre table
-                        (*ttable)[cle]->vhaute=val;
+                        ttable[cle]->vhaute=val;
                     }
 
                 }
@@ -150,10 +150,10 @@ int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int be
                 if(estValide(damier,3-joueur,i,j)){
 
                     if(val>alpha){
-                        Damier* fils=new Damier(*damier);
-                        joueCoup(fils,3-joueur,i,j);
+                        Damier* fils=new Damier(damier);
+                        joueCoup(*fils,3-joueur,i,j);
 
-                        v=alphaBeta(ttable,fils,joueur,prof-1,alpha,beta,true);
+                        v=alphaBeta(ttable,*fils,joueur,prof-1,alpha,beta,true);
                         if(v<val){
                             val=v;
                             meilleurcoup=i*10+j;
@@ -164,7 +164,7 @@ int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int be
                     else{
                         i=8;
                         j=8;
-                        (*ttable)[cle]->vbasse=val;
+                        ttable[cle]->vbasse=val;
 
                     }
                 }
@@ -174,13 +174,13 @@ int alphaBeta(Table* ttable,Damier* damier,int joueur,char prof,int alpha,int be
     //si notre valeur a ete calculee jusqu au bout -> maj de la table
     if(val>alpha && val<beta){
 
-        (*ttable)[cle]->vbasse=val;
-        (*ttable)[cle]->vhaute=val;
+        ttable[cle]->vbasse=val;
+        ttable[cle]->vhaute=val;
     }
 
-    (*ttable)[cle]->real_key=lcle;
-    (*ttable)[cle]->distance=prof;
-    (*ttable)[cle]->mc=meilleurcoup;
+    ttable[cle]->real_key=lcle;
+    ttable[cle]->distance=prof;
+    ttable[cle]->mc=meilleurcoup;
 
     return val;
 }

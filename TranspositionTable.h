@@ -48,5 +48,5 @@ public:
   *@brief fonction de hashage de type Zobrist
   *@param _damier est la position à hasher
 */
-unsigned int hashage(Damier* damier);
+unsigned int hashage(Damier& damier);
 #endif // TRANSPOSITIONTABLE_H_INCLUDED

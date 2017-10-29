@@ -30,7 +30,7 @@ Noeud::Noeud(char d,int vh, int vb){
 }
 
 
-unsigned int hashage(Damier* damier)
+unsigned int hashage(Damier& damier)
 {
     static unsigned int seeds[8][8][2]=
     {
@@ -48,9 +48,9 @@ unsigned int hashage(Damier* damier)
 
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
-            if(damier->getV(i,j)!=0){
+            if(damier.getV(i,j)!=0){
                 //xor sur les positions permet de calculer les nouvelles cle facilement
-                res=res^(seeds[i][j][damier->getV(i,j)]);
+                res=res^(seeds[i][j][damier.getV(i,j)]);
             }
         }
     }

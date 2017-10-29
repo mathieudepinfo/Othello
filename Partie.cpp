@@ -34,7 +34,7 @@ void playerVSIA(int player)
     int i(0),j(0);
     int coup(0);
     string s;
-    while(!testFin(dam)){
+    while(!testFin(*dam)){
 
         dam->affiche();
         if(joueur==player){
@@ -50,12 +50,12 @@ void playerVSIA(int player)
                     j=coup%10;
                 }
 
-            }while(!estValide(dam,joueur,i,j));
+            }while(!estValide(*dam,joueur,i,j));
 
         }
         else{
             //profondeur de 4
-            coup=joueCoupIA2(dam,joueur,4);
+            coup=joueCoupIA2(*dam,joueur,4);
 
             if(coup<0){
                 i=-1;
@@ -68,7 +68,7 @@ void playerVSIA(int player)
         }
 
         cout<< i<<" "<<j<<" "<<joueur<<"\n";
-        joueCoup(dam,joueur,i,j);
+        joueCoup(*dam,joueur,i,j);
         joueur=3-joueur;
     }
 
@@ -106,7 +106,7 @@ void IAVSIA(int prof)
     };
 
     Damier* dam=new Damier(setup,cont);
-    cout<<heuristique(dam,1)<<" "<<heuristique(dam,2)<<"\n";
+    cout<<heuristique(*dam,1)<<" "<<heuristique(*dam,2)<<"\n";
     Table* ttable=new Table();
     Table* ttable2=new Table();
 
@@ -115,19 +115,19 @@ void IAVSIA(int prof)
     int c(0);
 
     string s;
-    while(!testFin(dam)){
+    while(!testFin(*dam)){
 
         dam->affiche();
 
         if(joueur==1){
         printf("avec memoire \n");
-        alphaBeta(ttable,dam,joueur,prof,MINI,MAXI);
-        c=(*ttable)[hashage(dam)]->mc;
+        alphaBeta(*ttable,*dam,joueur,prof,MINI,MAXI);
+        c=(*ttable)[hashage(*dam)]->mc;
         }
         else{
             printf("MTD \n");
-            MTD(0,ttable2,dam,joueur,prof);
-            c=(*ttable2)[hashage(dam)]->mc;
+            MTD(0,*ttable2,*dam,joueur,prof);
+            c=(*ttable2)[hashage(*dam)]->mc;
         }
         if(c<0){
             i=-1;
@@ -138,16 +138,16 @@ void IAVSIA(int prof)
             j=c%10;
         }
 
-        if(!estValide(dam,joueur,i,j)){
+        if(!estValide(*dam,joueur,i,j)){
             printf("erreur");
             return ;
         }
         cout<< i<<" "<<j<<" "<<joueur<<"\n";
-        joueCoup(dam,joueur,i,j);
+        joueCoup(*dam,joueur,i,j);
         joueur=3-joueur;
     }
     dam->affiche();
-    cout<<score(dam,2)<<"\n";
+    cout<<score(*dam,2)<<"\n";
 
     delete ttable;
     delete dam;

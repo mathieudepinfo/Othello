@@ -12,7 +12,7 @@ int initSDL(){
 
 }
 
-int menu(SDL_Window* fenetre)
+int menu(SDL_Window& fenetre)
 {
 
 }

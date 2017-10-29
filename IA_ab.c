@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int alphaBeta2(Damier* damier,int joueur,char prof,int alpha,int beta,bool maxnode)
+int alphaBeta2(Damier& damier,int joueur,char prof,int alpha,int beta,bool maxnode)
 {
 
     int val;
@@ -22,9 +22,9 @@ int alphaBeta2(Damier* damier,int joueur,char prof,int alpha,int beta,bool maxno
                 if(estValide(damier,joueur,i,j)){
 
                     if(val<beta){
-                        Damier* fils=new Damier(*damier);
-                        joueCoup(fils,joueur,i,j);
-                        val=maxi(val,alphaBeta2(fils,joueur,prof-1,alpha,beta,false));
+                        Damier* fils=new Damier(damier);
+                        joueCoup(*fils,joueur,i,j);
+                        val=maxi(val,alphaBeta2(*fils,joueur,prof-1,alpha,beta,false));
                         alpha=maxi(alpha,val);
                         delete fils;
                     }
@@ -48,9 +48,9 @@ int alphaBeta2(Damier* damier,int joueur,char prof,int alpha,int beta,bool maxno
                 if(estValide(damier,3-joueur,i,j)){
 
                     if(val>alpha){
-                        Damier* fils=new Damier(*damier);
-                        joueCoup(fils,3-joueur,i,j);
-                        val=mini(val,alphaBeta2(fils,joueur,prof-1,alpha,beta,true));
+                        Damier* fils=new Damier(damier);
+                        joueCoup(*fils,3-joueur,i,j);
+                        val=mini(val,alphaBeta2(*fils,joueur,prof-1,alpha,beta,true));
                         beta=mini(val,beta);
                         delete fils;
                     }
@@ -69,7 +69,7 @@ int alphaBeta2(Damier* damier,int joueur,char prof,int alpha,int beta,bool maxno
     return val;
 }
 
-int joueCoupIA2(Damier* damier,int joueur,char prof)
+int joueCoupIA2(Damier& damier,int joueur,char prof)
 {
     int vmax(MINI),val(MINI);
     int alpha(MINI),beta(MAXI);
@@ -82,9 +82,9 @@ int joueCoupIA2(Damier* damier,int joueur,char prof)
             if(estValide(damier,joueur,i,j)){
 
                 if(val<beta){
-                    Damier* fils=new Damier(*damier);
-                    joueCoup(fils,joueur,i,j);
-                    val=alphaBeta2(fils,joueur,prof-1,alpha,beta,false);
+                    Damier* fils=new Damier(damier);
+                    joueCoup(*fils,joueur,i,j);
+                    val=alphaBeta2(*fils,joueur,prof-1,alpha,beta,false);
                     if(val>vmax){
                         vmax=val;
                         meilleurcoup=i*10+j;
