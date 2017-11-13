@@ -4,6 +4,8 @@
 #include "Damier.h"
 #include "Othello.h"
 #include "TranspositionTable.h"
+#include <stdio.h>
+#include <assert.h>
 
 inline int maxi(int a,int b){
 
@@ -14,33 +16,30 @@ inline int mini(int a,int b){
     return (a<b)? a:b;
 }
 
+/**
+ * @brief met toutes les possibilités de jeu pour jouer dans les n_coups premières cases de coups
+ * @param int coups[64][2] paramètre modifié,liste des coups possible
+ * @param Damier& damier état actuel
+ * @param int& n_coups entier qui contient le nombre de coups possibles
+ * @param int joueur
+ */
+void possibilites(int coups[64][2],Damier& damier,int& n_coups,int joueur);
+
+bool inList(int i,int j,int coups[64][2],int n_coups);
+
+/**
+ *
+ */
+void possibilites(int coups[64][2],Damier& damier,int& n_coups,int joueur,Table& ttable, unsigned int cle);
 
 /**
   *@brief permet d'evaluer la valeur d'une position
+  *@param Damier& damier la position à évaluer
+  *@param int joueur
   *@return valeur de la position
 */
 int heuristique(Damier& damier,int joueur);
 
-/**
-  *@brief algorithme alpha-beta avec memoire
-  *@param ttable est une table de transposition
-          _damier est la racine de l'arbre
-          prof est la profondeur max a evaluer dans l'arbre , Pinit la profondeur max
-          coup sera mise a la valeur du meilleur coup sous la forme i*10+j
-          alpha est un minorant de la valeur
-          beta est un majorant de la valeur
-          maxnode permet de differencier noeuds min et max (pas d'implementation Negamax)
-  *@return valeur strategique de la racine
-*/
-int alphaBeta(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,bool maxnode=true);
-
-/**
-  *@brief identique a alphabeta sauf pour le return
-  *@param ttable est une table de transposition
-          _damier est la racine de l'arbre
-          prof est la profondeur max a evaluer dans l'arbre
-  *@return le meilleur coup possible depuis la position sous la forme i*10+j avec i numero de ligne et j de colonne
-*/
 #endif // IA_MAIN_H_INCLUDED
 
 

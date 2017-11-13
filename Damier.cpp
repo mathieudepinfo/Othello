@@ -2,12 +2,11 @@
 
 using namespace std;
 
-void Damier::init(Damier* damier,const int setup[8][8],const int cont[8][8])
+void Damier::init(Damier* damier,const int setup[8][8])
 {
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
             damier->setV(setup[i][j],i,j);
-            damier->setC(cont[i][j],i,j);
             if(damier->getV(i,j)!=0){
                 damier->iNp();
             }
@@ -16,11 +15,11 @@ void Damier::init(Damier* damier,const int setup[8][8],const int cont[8][8])
 }
 
 Damier::Damier(const Damier& damier){
-    init(this,damier.cases,damier.contigues);
+    init(this,damier.cases);
 }
 
-Damier::Damier(const int setup[8][8],const int cont[8][8]){
-    init(this,setup,cont);
+Damier::Damier(const int setup[8][8]){
+    init(this,setup);
 }
 
 void Damier::affiche()
@@ -37,7 +36,6 @@ void Damier::affiche()
         }
         cout<<"\n";
     }
-
 }
 
 

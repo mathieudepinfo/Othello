@@ -9,6 +9,7 @@
 #include "TranspositionTable.h"
 #include "IA_ab.h"
 #include "IA_MTDf.h"
+#include "IterativeDeepening.h"
 
 /**
   *@brief lance une partie joueur contre IA
@@ -18,6 +19,7 @@ void playerVSIA(int player);
 
 /**
   *@brief lance une partie IA contre IA
-*/
-void IAVSIA(int prof);
+  *@param prof est la profondeur maximale à laquelle joue alphabeta ou MTD
+ */
+void IAVSIA(char prof);
 #endif // PARTIE_H_INCLUDED
