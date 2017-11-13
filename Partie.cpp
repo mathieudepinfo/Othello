@@ -15,19 +15,8 @@ void playerVSIA(int player)
         {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
     };
-    int cont[8][8]=
-    {
-        {3,5,5,5,5,5,5,3},
-        {5,8,8,8,8,8,8,5},
-        {5,8,7,6,6,7,8,5},
-        {5,8,6,5,5,6,8,5},
-        {5,8,6,5,5,6,8,5},
-        {5,8,7,6,6,7,8,5},
-        {5,8,8,8,8,8,8,5},
-        {3,5,5,5,5,5,5,3},
-    };
 
-    Damier* dam=new Damier(setup,cont);
+    Damier* dam=new Damier(setup);
     Table* ttable=new Table();
 
     int joueur=1;
@@ -55,7 +44,7 @@ void playerVSIA(int player)
         }
         else{
             //profondeur de 4
-            coup=joueCoupIA2(*dam,joueur,4);
+            alphaBeta(*dam,joueur,4,MINI,MAXI,coup);
 
             if(coup<0){
                 i=-1;
@@ -77,7 +66,7 @@ void playerVSIA(int player)
 
 }
 
-void IAVSIA(int prof)
+void IAVSIA(char prof)
 {
 
     //position initiale
@@ -93,19 +82,7 @@ void IAVSIA(int prof)
         {0,0,0,0,0,0,0,0},
     };
 
-    int cont[8][8]=
-    {
-        {3,5,5,5,5,5,5,3},
-        {5,8,8,8,8,8,8,5},
-        {5,8,7,6,6,7,8,5},
-        {5,8,6,5,5,6,8,5},
-        {5,8,6,5,5,6,8,5},
-        {5,8,7,6,6,7,8,5},
-        {5,8,8,8,8,8,8,5},
-        {3,5,5,5,5,5,5,3},
-    };
-
-    Damier* dam=new Damier(setup,cont);
+    Damier* dam=new Damier(setup);
     cout<<heuristique(*dam,1)<<" "<<heuristique(*dam,2)<<"\n";
     Table* ttable=new Table();
     Table* ttable2=new Table();
@@ -113,22 +90,31 @@ void IAVSIA(int prof)
     int joueur=1;
     int i(0),j(0);
     int c(0);
+    time_t tmax;
 
-    string s;
     while(!testFin(*dam)){
 
         dam->affiche();
 
         if(joueur==1){
-        printf("avec memoire \n");
-        alphaBeta(*ttable,*dam,joueur,prof,MINI,MAXI);
-        c=(*ttable)[hashage(*dam)]->mc;
+        printf("avec memoire :");
+        //c=joueCoupIA2(*dam,joueur,prof,i);
+        alphaBetaTT(*ttable,*dam,joueur,prof,MINI,MAXI,prof);
+        c=(*ttable)[hashage(*dam,joueur)%TABLE_SIZE]->getC();
+        printf("%d %d \n",(*ttable)[hashage(*dam,joueur)%TABLE_SIZE]->getL(),(*ttable)[hashage(*dam,joueur)%TABLE_SIZE]->getU());
+        ttable->reset();
         }
+
         else{
             printf("MTD \n");
-            MTD(0,*ttable2,*dam,joueur,prof);
-            c=(*ttable2)[hashage(*dam)]->mc;
+            //c=joueCoupIA2(*dam,joueur,prof,i);
+            tmax=1;
+            c=ID(tmax,prof+10,*dam,*ttable2,joueur);
+
+            ttable2->reset();
+
         }
+
         if(c<0){
             i=-1;
             j=0;
@@ -139,7 +125,7 @@ void IAVSIA(int prof)
         }
 
         if(!estValide(*dam,joueur,i,j)){
-            printf("erreur");
+            printf("erreur %d %d \n",i,j);
             return ;
         }
         cout<< i<<" "<<j<<" "<<joueur<<"\n";
@@ -147,9 +133,12 @@ void IAVSIA(int prof)
         joueur=3-joueur;
     }
     dam->affiche();
-    cout<<score(*dam,2)<<"\n";
+
+    cout<<"1:"<<score(*dam,1)<<"\n";
+    cout<<"2:"<<score(*dam,2)<<"\n";
 
     delete ttable;
+    delete ttable2;
     delete dam;
 
 }

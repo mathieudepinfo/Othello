@@ -2,36 +2,73 @@
 
 using namespace std;
 
-Table::Table(){
-
+Table::Table()
+{
     this->hashtable=new Noeud*[TABLE_SIZE];
+    this->presence=new bool[TABLE_SIZE];
+
     for(int i(0);i<TABLE_SIZE;i++){
-        //l'initialistation de distance à 255 permet de dire que le noeud est inexploré
-        //(maximum 60coups dans une partie  => prof<=60
-        this->hashtable[i]=new Noeud(255,MAXI,MINI);
+
+        this->hashtable[i]=new Noeud();
+        this->presence[i]=0;
     }
 
 }
 
-Table::~Table(){
+Table::Table(const Table& table)
+{
+    this->hashtable=new Noeud*[TABLE_SIZE];
+    this->presence=new bool[TABLE_SIZE];
+
+    for(int i(0);i<TABLE_SIZE;i++){
+        //on ne peut pas utiliser table[i] car table est const
+        this->hashtable[i]=new Noeud(*(table.hashtable[i]));
+        this->presence[i]=table.isIn(i);
+    }
+}
+
+Table::~Table()
+{
     for(int i(0);i<TABLE_SIZE;i++){
         delete this->hashtable[i];
     }
     delete[] hashtable;
+    delete[] presence;
 }
 
-Noeud::Noeud(char d,int vh, int vb){
-
-    this->distance=d;
-    this->vhaute=vh;
-    this->vbasse=vb;
-    this->real_key=0;
-    this->mc=0;
-}
-
-
-unsigned int hashage(Damier& damier)
+Table::Noeud::Noeud()
 {
+    this->distance=UNDEF;
+    this->nbasse=MAXI;
+    this->nhaute=MINI;
+    this->real_key=UNDEF;
+    this->mc=UNDEF;
+}
+
+Table::Noeud::Noeud(const Noeud& ni)
+{
+    this->distance=ni.getD();
+    this->nbasse=ni.getL();
+    this->nhaute=ni.getU();
+    this->real_key=ni.getK();
+    this->mc=ni.getC();
+}
+
+void Table::reset()
+{
+    for(int i=0;i<TABLE_SIZE;i++){
+        (*this)[i]->setC(UNDEF);
+        (*this)[i]->setD(UNDEF);
+        (*this)[i]->setK(UNDEF);
+        (*this)[i]->setL(MAXI);
+        (*this)[i]->setU(MINI);
+        this->presence[i]=0;
+    }
+}
+
+unsigned int hashage(Damier& damier,int joueur)
+{
+    //seeds utilisées pour le hashage (type Zobrist), tableau symétrique par rotation de 90degrés
     static unsigned int seeds[8][8][2]=
     {
         {{1656079727,610232524},{125089092,1628998920},{1703760725,882565151},{1639394878,297003772},{1639394878,297003772},{1703760725,882565151},{125089092,1628998920},{1656079727,610232524}},
@@ -49,11 +86,12 @@ unsigned int hashage(Damier& damier)
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
             if(damier.getV(i,j)!=0){
-                //xor sur les positions permet de calculer les nouvelles cle facilement
+                //xor sur les positions
                 res=res^(seeds[i][j][damier.getV(i,j)]);
             }
         }
     }
+    res=res^joueur;
     return res;
 }
 

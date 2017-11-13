@@ -1,6 +1,8 @@
 #include "IA_MTDf.h"
 
-int MTD(int f,Table& ttable,Damier& root,int joueur,char prof)
+using namespace std;
+
+int MTD(int& f,Table& ttable,Damier& root,int joueur,char prof,time_t tmax,time_t t0)
 {
     int val=f;
     int haute=MAXI;
@@ -15,28 +17,23 @@ int MTD(int f,Table& ttable,Damier& root,int joueur,char prof)
         else{
             x=val;
         }
-        val=alphaBeta(ttable,root,joueur,prof,x-1,x);
+        //on lance un alphabeta avec une fenetre nulle, il retourne donc forcement une upperbound ou une lowerbound
+        val=alphaBetaTT(ttable,root,joueur,prof,x-1,x,prof);
+
         if(val<x){
             haute=val;
         }
         else{
             basse=val;
         }
-        #ifdef DEBUG
-        printf("b=%d  h=%d \n",basse,haute);
-        #endif // DEBUG
-        update(ttable);
-    }
 
-    return val;
-}
-
-void update(Table& ttable){
-
-
-    for(int i(0);i<TABLE_SIZE;i++){
-        if(ttable[i]->distance!=255 && ttable[i]->vhaute!=ttable[i]->vbasse){
-            ttable[i]->distance=255;
+        //si on a plus de temps on arrete, attention à ce stade val et ttable peuvent avoir été modifiés sans avoir de signification
+        if(tmax<time(NULL)-t0){
+            throw "fini";
         }
     }
+
+    f=val;
+
+    return val;
 }

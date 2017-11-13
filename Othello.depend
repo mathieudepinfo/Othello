@@ -1,36 +1,36 @@
 # depslib dependency file v1.0
-1507487716 source:/home/mathieu/workspace/projetsC/Othello/Damier.cpp
+1509207615 source:/home/mathieu/workspace/projetsC/Othello/Damier.cpp
 	"Damier.h"
 
-1507496536 /home/mathieu/workspace/projetsC/Othello/Damier.h
+1509207485 /home/mathieu/workspace/projetsC/Othello/Damier.h
 	<iostream>
 
-1507496140 source:/home/mathieu/workspace/projetsC/Othello/Othello.cpp
+1509206788 source:/home/mathieu/workspace/projetsC/Othello/Othello.cpp
 	"Othello.h"
+	<unistd.h>
 
-1507558394 /home/mathieu/workspace/projetsC/Othello/Othello.h
+1509206868 /home/mathieu/workspace/projetsC/Othello/Othello.h
 	"Damier.h"
 	<vector>
 
-1507559814 source:/home/mathieu/workspace/projetsC/Othello/main.cpp
+1509303475 source:/home/mathieu/workspace/projetsC/Othello/main.cpp
 	<iostream>
-	"Damier.h"
-	"Othello.h"
-	"IA_main.h"
 	"Partie.h"
+	<unistd.h>
 
-1507496494 source:/home/mathieu/workspace/projetsC/Othello/IA_main.cpp
+1509207074 source:/home/mathieu/workspace/projetsC/Othello/IA_main.cpp
 	"IA_main.h"
+	<stdio.h>
 
-1507587951 /home/mathieu/workspace/projetsC/Othello/IA_main.h
+1509207086 /home/mathieu/workspace/projetsC/Othello/IA_main.h
 	"Damier.h"
 	"Othello.h"
 	"TranspositionTable.h"
 
-1507644146 /home/mathieu/workspace/projetsC/Othello/TranspositionTable.h
+1509207326 /home/mathieu/workspace/projetsC/Othello/TranspositionTable.h
 	"Damier.h"
 
-1507585666 /home/mathieu/workspace/projetsC/Othello/Partie.h
+1508695804 /home/mathieu/workspace/projetsC/Othello/Partie.h
 	"Damier.h"
 	"Othello.h"
 	<iostream>
@@ -38,9 +38,33 @@
 	"IA_main.h"
 	"TranspositionTable.h"
 	"IA_ab.h"
+	"IA_MTDf.h"
 
-1507585737 /home/mathieu/workspace/projetsC/Othello/IA_ab.h
+1509207434 /home/mathieu/workspace/projetsC/Othello/IA_ab.h
 	"Damier.h"
 	"Othello.h"
 	"IA_main.h"
+
+1509207784 source:/home/mathieu/workspace/projetsC/Othello/IA_ab.cpp
+	"IA_main.h"
+	"IA_ab.h"
+
+1509207120 source:/home/mathieu/workspace/projetsC/Othello/IA_MTDf.cpp
+	"IA_MTDf.h"
+
+1509207253 /home/mathieu/workspace/projetsC/Othello/IA_MTDf.h
+	"IA_main.h"
+
+1509208504 source:/home/mathieu/workspace/projetsC/Othello/Interface.cpp
+	"Interface.h"
+
+1507933682 /home/mathieu/workspace/projetsC/Othello/Interface.h
+	"SDL2/SDL.h"
+	<stdio.h>
+
+1509208431 source:/home/mathieu/workspace/projetsC/Othello/Partie.cpp
+	"Partie.h"
+
+1509207305 source:/home/mathieu/workspace/projetsC/Othello/TranspositionTable.cpp
+	"TranspositionTable.h"
 

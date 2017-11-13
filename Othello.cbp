@@ -36,14 +36,16 @@
 		<Unit filename="Damier.h" />
 		<Unit filename="IA_MTDf.cpp" />
 		<Unit filename="IA_MTDf.h" />
-		<Unit filename="IA_ab.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="IA_ab.cpp" />
 		<Unit filename="IA_ab.h" />
+		<Unit filename="IA_abTT.cpp" />
+		<Unit filename="IA_abTT.h" />
 		<Unit filename="IA_main.cpp" />
 		<Unit filename="IA_main.h" />
 		<Unit filename="Interface.cpp" />
 		<Unit filename="Interface.h" />
+		<Unit filename="IterativeDeepening.cpp" />
+		<Unit filename="IterativeDeepening.h" />
 		<Unit filename="Othello.cpp" />
 		<Unit filename="Othello.h" />
 		<Unit filename="Partie.cpp" />
@@ -51,6 +53,8 @@
 		<Unit filename="TranspositionTable.cpp" />
 		<Unit filename="TranspositionTable.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="testia.cpp" />
+		<Unit filename="testia.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

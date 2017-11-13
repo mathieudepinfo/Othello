@@ -4,10 +4,8 @@ using namespace std;
 
 bool estValide(Damier& damier,int joueur,int k,int l)
 {
-
     //si on souhaite passer
     if(k<0){
-
         for(int i(0);i<8;i++){
             for(int j(0);j<8;j++){
                 if(estValide(damier,joueur,i,j)){
@@ -24,12 +22,16 @@ bool estValide(Damier& damier,int joueur,int k,int l)
     }
 
     int d[3]={-1,0,1};//directions
+    bool pion_adv;
+    int cpt;
+
     for(int i(0);i<3;i++){
         for(int j(0);j<3;j++){
 
             if(d[i]!=0 || d[j]!=0){
-                bool pion_adv(false);
-                int cpt(1);
+
+                pion_adv=false;
+                cpt=1;
 
                 //on parcours une direction, il faut qu'on trouve un pion adverse puis un pion allie
                 while(0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
@@ -48,7 +50,6 @@ bool estValide(Damier& damier,int joueur,int k,int l)
             }
         }
     }
-
     return false;
 }
 
@@ -57,45 +58,19 @@ void joueCoup(Damier& damier,int joueur, int k,int l)
     //si on ne veut pas passer
     if(k>=0){
 
-        //mise a jour des cases contigues
-
-        if((k-1)>=0){
-            damier.Cminus(k-1,l,1);
-            if((l+1)<8){
-                damier.Cminus(k-1,l+1,1);
-            }
-        }
-        if((l-1)>=0){
-            damier.Cminus(k,l-1,1);
-            if((k-1)>=0){
-                damier.Cminus(k-1,l-1,1);
-            }
-
-        }
-        if((k+1)<8){
-
-            damier.Cminus(k+1,l,1);
-            if((l-1)>=0){
-                damier.Cminus(k+1,l-1,1);
-            }
-        }
-        if((l+1)<8){
-            damier.Cminus(k,l+1,1);
-            if((k+1)<8){
-                damier.Cminus(k+1,l+1,1);
-            }
-        }
-
         damier.iNp();
         damier.setV(joueur,k,l);
-        //on mange les pions
+
         int d[3]={-1,0,1};
+        bool p_adv;
+        int cpt;
+        //on mange les pions
         for(int i(0);i<3;i++){
             for(int j(0);j<3;j++){
                 if(d[i]!=0 || d[j]!=0){
 
-                    bool p_adv(false);
-                    int cpt(1);
+                    p_adv=false,
+                    cpt=1;
 
                     //on parcours une direction, il faut qu'on trouve un pion adverse puis un pion allie
                     while( 0<=(k+cpt*d[i]) && (k+cpt*d[i])<8 && 0<=(l+cpt*d[j]) && (l+cpt*d[j])<8
