@@ -5,8 +5,6 @@
 #include <vector>
 #include "IA_main.h"
 
-#define MAXI 2147483647
-#define MINI -2147483647
 /**
  * @brief fonction qui retourne la valeur d'un état grace a l'algorithme alphabeta, meilleurcoup contient le meilleurcoup possible pour cet état
  * @param Damier& damier est l'état initial à évaluer

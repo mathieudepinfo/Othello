@@ -5,6 +5,7 @@
 #include "Damier.h"
 #include "Othello.h"
 #include "TranspositionTable.h"
+#include "Consts.h"
 
 #include <stdio.h>
 #include <assert.h>

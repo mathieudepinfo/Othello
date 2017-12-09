@@ -1,14 +1,10 @@
 #pragma once
 
-///====================================Fichier contenant la classe Bouton et ses dérivées=============
+///=============================Fichier contenant la classe Bouton et ses dérivées=============
 
+#include "Consts.h"
 #include "SDL.h"
-#include "ObjetGraphique.h"
 #include "Plateau.h"
-
-#define IAVSIA 0
-#define JVSIA 1
-#define JVJ 2
 
 /**
  * Classe qui représente un bouton sans action, étend la classe ObjetGraphique, pas de classe virtuelle action car paramètres différents
@@ -70,6 +66,7 @@ public:
 	 * @param plateau le plateau de jeu
 	 * @param j le joueur si partie contre IA
 	 * @param type le type de partie
+	 * @param fenetre la fenetre qui contient plateau
 	 */
 	void action(Plateau* plateau,int& type);
 

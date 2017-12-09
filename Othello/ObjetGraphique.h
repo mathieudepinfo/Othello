@@ -3,12 +3,7 @@
 ///====================================Classe ObjetGraphique========
 
 #include "SDL.h"
-
-//différents types d'objets
-#define BOUTON 1
-#define PLATEAU 2
-#define BOUTON_NIVEAU 3
-#define BOUTON_START 4
+#include "Consts.h"
 
 /**
  * Classe mère de tout objet présent dans un MenuPrincipal

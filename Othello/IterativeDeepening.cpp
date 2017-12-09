@@ -13,7 +13,7 @@ int ID(time_t tmax,char pmax,Damier& damier,Table& ttable,int joueur){
         //on fait une copie de ttable en cas d'arrêt prématuré de MTD-f
         Table* table_tmp=new Table(ttable);
         try{
-			if (damier.getNp() < 50) {
+			if (damier.getNp() < 55) {
 				MTD(score[prof % 2], ttable, damier, joueur, prof,heuristiqueMilieuDePartie, tmax, t0);
 			}
 			else {

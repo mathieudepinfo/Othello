@@ -9,7 +9,7 @@ MenuPrincipal::MenuPrincipal()
 	//création du renderer
 	renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	//création de la banque d'image
-	banque = new BanqueImage(renderer);
+	banque = new BanqueImage(renderer); 
 
 	items = new std::vector<ObjetGraphique*>();
 	
@@ -40,6 +40,8 @@ void MenuPrincipal::actualise() {
 		obj->render(renderer);
 	}
 
+	renderFocus();
+
 	//on affiche le résultat
 	SDL_RenderPresent(renderer);
 }
@@ -63,6 +65,8 @@ ObjetGraphique* MenuPrincipal::getObjectOnMouseClick(SDL_Event& event) {
 	for (auto obj : *items) {
 		if (obj->clickable) {//on ne peut retourner que les objets clickable
 			if (obj->isInZone(x, y)) {
+				//si un objet prend le focus on l'indique
+				focusedObject = obj;
 				return obj;
 			}
 		}
@@ -76,4 +80,20 @@ ObjetGraphique* MenuPrincipal::getObjectOnMouseClick(SDL_Event& event) {
 SDL_Texture * MenuPrincipal::getTexture(std::string name)
 {
 	return banque->getImage(name);
+}
+
+void MenuPrincipal::renderFocus() {
+
+	if (focusedObject == nullptr) return;
+
+	SDL_Rect* zone = focusedObject->getZone();
+
+	SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
+
+	SDL_RenderDrawLine(renderer, zone->x, zone->y, zone->x + zone->w,zone->y);
+	SDL_RenderDrawLine(renderer, zone->x+zone->w, zone->y, zone->x + zone->w, zone->y+zone->h);
+	SDL_RenderDrawLine(renderer, zone->x+zone->w, zone->y+zone->h, zone->x, zone->y+zone->h);
+	SDL_RenderDrawLine(renderer, zone->x, zone->y+zone->h, zone->x , zone->y);
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }

@@ -4,7 +4,9 @@
 
 #include "SDL.h"
 #include <vector>
+#include "SDL_ttf.h"
 
+#include "ObjetGraphique.h"
 #include "Bouton.h"
 #include "BanqueImage.h"
 #include "Plateau.h"
@@ -16,6 +18,7 @@
  * -une banque d'image
  * -une SDL_Window
  * -un SDL_Renderer
+ * -une police de caractères
  */
 class MenuPrincipal
 {
@@ -26,10 +29,13 @@ protected:
 	SDL_Window* fenetre;
 	SDL_Renderer* renderer;
 
+
 	MenuPrincipal();
 
 public:
 	
+	ObjetGraphique* focusedObject;
+
 	/**
 	 * Fonction statique qui permet de n'avoir qu'une instance de la classe au maximum
 	 */
@@ -47,6 +53,8 @@ public:
 	ObjetGraphique* getObjectOnMouseClick(SDL_Event& event);
 
 	SDL_Texture* getTexture(std::string name);
+
+	void renderFocus();
 
 	BanqueImage* getBanque() {
 		return banque;

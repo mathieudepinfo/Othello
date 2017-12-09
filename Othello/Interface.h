@@ -24,3 +24,13 @@ int initSDL();
  * @param i, j représentent une case initiale sur laquelle jouer
  */
 void joueTour(MenuPrincipal* fenetre, Plateau* plateau, int difficulte, int typePartie, int i, int j);
+
+/**
+ * Fonction lancée si il y a une partie dans le plateau lorsque l'in appuie sur "h" qui permet d'obenir l'aide de l'IA
+ */
+void mentor(Plateau* plateau);
+
+/**
+ * Lance une partie IAVSIA dans plateau
+ */
+void joueIAVSIA(MenuPrincipal* fenetre, Plateau* plateau, int difficulte);

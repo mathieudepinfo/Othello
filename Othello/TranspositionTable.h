@@ -2,22 +2,23 @@
 
 ///================Classe Table==========================
 
+#include "Consts.h"
 #include "Damier.h"
 #include <vector>
 
-const int MINI=-10000;
-const int MAXI=10000;
-const int TABLE_SIZE=65536;
-const int UNDEF=-10;
 
  /** Table représente une table de transposition.
   *  Une table sert à stocker des informations sur un Noeud
   *  Elle dispose de TABLE_SIZE places dans sa table de hashage.
   *  Elle ccontient aussi un tableau int presence[TABLE_SIZE] qui
   *  permet de savoir si le Noeud recherché a déja été exploré
+  *  UNDEF sert à initialiser les valeurs
   */
 class Table
 {
+	
+	static const int UNDEF = -10;
+
 protected:
 
     /**Un Noeud représente un élement de la table,

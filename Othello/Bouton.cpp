@@ -32,7 +32,9 @@ void Bouton::render(SDL_Renderer* renderer) {
 ///==========================================
 
 void BoutonStart::action(Plateau* plateau,int& type) {
+
 	plateau->clickable = true;
+
 	int setup[8][8] =
 	{
 		{ 0,0,0,0,0,0,0,0 },

@@ -4,18 +4,20 @@
 
 #include <iostream>
 #include "SDL.h"
+
 /**Damier représente un plateau de jeu,
  * il possède un attribut int cases[8][8] qui représente l'état du damier
  * un damier sait toujours son nombre de pions actuels gràce a nbPions
  */
 class Damier
 {
-    private:
+
+private:
 
     int cases[8][8];
     int nbPions=0;
 
-    public:
+public:
     /**
      * @brief initialise un damier passé en argument avec cases=setup
      * @param Damier* damier, un pointeur vers le damier à initialiser
@@ -23,13 +25,13 @@ class Damier
      */
     void init(Damier* damier,const int setup[8][8]);
 
-    ///constructeur à partir d'un setup
+    //constructeur à partir d'un setup
     Damier(const int setup[8][8]);
 
-    ///constructeur de copie
+    //constructeur de copie
     Damier(const Damier &damier);
 
-    ///fonctions get, membres constants
+    //fonctions get, membres constants
     int getV(int i,int j)const{
         return cases[i][j];
     }
@@ -56,6 +58,7 @@ class Damier
     *@brief affiche le damier en console
     */
     void affiche();
+
 };
 
 

@@ -67,7 +67,7 @@ void playerVSIA(int player)
 
 }
 
-void IAVSIA(char prof)
+void partieIAVSIA(char prof)
 {
 
     //position initiale

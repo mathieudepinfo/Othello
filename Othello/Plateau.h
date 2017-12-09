@@ -1,16 +1,15 @@
 #pragma once
 
+///======================Classe Plateau=========================
+
 #include "ObjetGraphique.h"
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include "Damier.h"
 #include "BanqueImage.h"
 #include "Othello.h"
-
-#define POSSIBLE 10
-#define MENTOR 5
-#define NOIR 2
-#define	BLANC 1
-#define VIDE 0
+#include "Consts.h"
+#include <string> 
 
 /**
  * Classe représentant un plateau de jeu associé à un damier, un plateau est clickable s'il représente une partie en cours
@@ -21,6 +20,7 @@ class Plateau : public ObjetGraphique
 private:
 	Damier* damier;
 	BanqueImage* banque;
+	TTF_Font* police;
 	
 public:
 
@@ -51,5 +51,7 @@ public:
 	Damier* getDamier() {
 		return damier;
 	}
+
+	void afficheScore(SDL_Renderer* renderer);
 };
 
