@@ -3,6 +3,7 @@
 ///====================================Fichier contenant la classe BanqueImage=================================
 
 #include "SDL.h"
+
 #include <map>
 #include <vector>
 #include <iostream>

@@ -2,12 +2,24 @@
 
 ///===========================Fichier contenant des fonctions relatives à l'interface=========================
 
-#include <stdio.h>
-#include <iostream>
-
 #include "SDL.h"
-#include "Partie.h"
+
+#include <iostream>
+#include <vector>
+
 #include "MenuPrincipal.h"
+#include "Plateau.h"
+
+#include "Damier.h"
+#include "TranspositionTable.h"
+#include "Othello.h"
+#include "IA_ab.h"
+#include "IterativeDeepening.h"
+
+#include <vector>
+
+class Plateau;
+class MenuPrincipal;
 
 /**
  *	Fonction qui sert à initialiser la SDL
@@ -23,14 +35,19 @@ int initSDL();
  * @param typePartie indique si l'on joue une partie JVJ ou JVSIA
  * @param i, j représentent une case initiale sur laquelle jouer
  */
-void joueTour(MenuPrincipal* fenetre, Plateau* plateau, int difficulte, int typePartie, int i, int j);
+void joueTour(MenuPrincipal* fenetre, Plateau* plateau, int joueur,int difficulte, int typePartie, int i, int j);
 
-/**
- * Fonction lancée si il y a une partie dans le plateau lorsque l'in appuie sur "h" qui permet d'obenir l'aide de l'IA
- */
-void mentor(Plateau* plateau);
 
 /**
  * Lance une partie IAVSIA dans plateau
  */
 void joueIAVSIA(MenuPrincipal* fenetre, Plateau* plateau, int difficulte);
+
+/**
+ * Fonction qui modifie coups pour contenir les pions qui seraient retournés si on joue en (k,l)
+ * @param coups le paramètre modifié qui contiendra les coups
+ * @param dam le damier de jeu
+ * @param joueur le joueur qui joue le coup
+ * @param k,l la ligne et la colonne ou l'on souhaite jouer
+ */
+void getRetournements(std::vector<int>& coups,const Damier& dam, int joueur, int k, int l);

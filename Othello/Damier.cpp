@@ -6,6 +6,7 @@ using namespace std;
 
 void Damier::init(Damier* damier,const int setup[8][8])
 {
+	nbPions = 0;
     for(int i(0);i<8;i++){
         for(int j(0);j<8;j++){
             damier->setV(setup[i][j],i,j);

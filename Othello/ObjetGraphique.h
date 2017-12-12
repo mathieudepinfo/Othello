@@ -9,7 +9,8 @@
  * Classe mère de tout objet présent dans un MenuPrincipal
  * -contient une image
  * -contient une zone d'affichage/hitbox
- * -un attribut clickable
+ * -un attribut clickable 
+ * -un attribut visible
  * -un attribut type
  */
 class ObjetGraphique
@@ -24,6 +25,7 @@ public:
 
 	int type;
 	bool clickable;
+	bool visible;
 
 	//constructeurs
 	ObjetGraphique(SDL_Texture* im,SDL_Rect* zone);

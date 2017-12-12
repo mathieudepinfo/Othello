@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int MTD(int& f,Table& ttable,Damier& root,int joueur,char prof, int (heuristique)(Damier&, int),time_t tmax,time_t t0)
+int MTD(int& f,Table& ttable,Damier& root,int joueur,char prof, int (*heuristique)(Damier&, int),time_t tmax,time_t t0)
 {
     int val=f;
     int haute=MAXI;

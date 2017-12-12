@@ -4,7 +4,13 @@
 
 #include "Consts.h"
 #include "SDL.h"
+
+#include "Damier.h"
+
+#include "ObjetGraphique.h"
 #include "Plateau.h"
+
+class Plateau;
 
 /**
  * Classe qui représente un bouton sans action, étend la classe ObjetGraphique, pas de classe virtuelle action car paramètres différents
@@ -74,4 +80,3 @@ public:
 		return typePartie;
 	}
 };
-

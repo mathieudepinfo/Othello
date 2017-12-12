@@ -3,12 +3,13 @@
 ///====================================Classe MenuPrincipal====================
 
 #include "SDL.h"
+
 #include <vector>
-#include "SDL_ttf.h"
 
 #include "ObjetGraphique.h"
-#include "Bouton.h"
 #include "BanqueImage.h"
+#include "Bouton.h"
+
 #include "Plateau.h"
 
 /**
@@ -58,6 +59,10 @@ public:
 
 	BanqueImage* getBanque() {
 		return banque;
+	}
+
+	SDL_Renderer* getRenderer() {
+		return renderer;
 	}
 };
 

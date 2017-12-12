@@ -6,6 +6,7 @@ ObjetGraphique::ObjetGraphique(SDL_Texture* im,SDL_Rect* z)
 {
 	zone = z;
 	image = im;
+	visible = true;
 }
 
 ///=============================
@@ -19,6 +20,7 @@ ObjetGraphique::ObjetGraphique(SDL_Texture * im, int anchorx, int anchory, int w
 	zone->w = width;
 	zone->h = height;
 	image = im;
+	visible = true;
 }
 
 ///=============================

@@ -20,6 +20,10 @@ BanqueImage::BanqueImage(SDL_Renderer* renderer)
 	this->ajouteImage(std::string("possible"),		std::string("possible.bmp"));
 	this->ajouteImage(std::string("vide"),			std::string("vide.bmp"));
 	this->ajouteImage(std::string("mentor"),		std::string("mentor.bmp"));
+	this->ajouteImage(std::string("retourBlanc"), std::string("retourBlanc.bmp"));
+	this->ajouteImage(std::string("retourNoir"), std::string("retourNoir.bmp"));
+	this->ajouteImage(std::string("boutonBlanc"), std::string("BoutonBlanc.bmp"));
+	this->ajouteImage(std::string("boutonNoir"), std::string("BoutonNoirs.bmp"));
 }
 
 ///============================================

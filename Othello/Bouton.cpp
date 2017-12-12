@@ -1,5 +1,4 @@
 #include "Bouton.h"
-#include <iostream>
 
 Bouton::Bouton(SDL_Texture* im,SDL_Rect* zone) :ObjetGraphique(im, zone)
 {
@@ -25,8 +24,9 @@ Bouton::~Bouton()
 ///==========================================
 
 void Bouton::render(SDL_Renderer* renderer) {
-
-	SDL_RenderCopy(renderer, image, NULL, zone);
+	if (visible) {
+		SDL_RenderCopy(renderer, image, NULL, zone);
+	}
 }
 
 ///==========================================

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta, int (heuristique)(Damier&, int),bool maxnode)
+int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta, int (*heuristique)(Damier&, int),bool maxnode)
 {
 
     int best,v,meilleurcoup(-10),a,b;

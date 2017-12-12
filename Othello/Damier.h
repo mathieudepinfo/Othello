@@ -3,7 +3,6 @@
 ///================Classe Damier==========================
 
 #include <iostream>
-#include "SDL.h"
 
 /**Damier représente un plateau de jeu,
  * il possède un attribut int cases[8][8] qui représente l'état du damier
@@ -15,7 +14,9 @@ class Damier
 private:
 
     int cases[8][8];
-    int nbPions=0;
+    int nbPions;
+	long presence;
+	long occupation;
 
 public:
     /**

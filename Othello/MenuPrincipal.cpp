@@ -66,7 +66,7 @@ ObjetGraphique* MenuPrincipal::getObjectOnMouseClick(SDL_Event& event) {
 		if (obj->clickable) {//on ne peut retourner que les objets clickable
 			if (obj->isInZone(x, y)) {
 				//si un objet prend le focus on l'indique
-				focusedObject = obj;
+				if(event.type == SDL_MOUSEBUTTONUP) focusedObject = obj;
 				return obj;
 			}
 		}
@@ -88,12 +88,15 @@ void MenuPrincipal::renderFocus() {
 
 	SDL_Rect* zone = focusedObject->getZone();
 
+	//couleur jaune
 	SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
 
+	//on dessine un rectangle autour de la zone de l'objet 
 	SDL_RenderDrawLine(renderer, zone->x, zone->y, zone->x + zone->w,zone->y);
 	SDL_RenderDrawLine(renderer, zone->x+zone->w, zone->y, zone->x + zone->w, zone->y+zone->h);
 	SDL_RenderDrawLine(renderer, zone->x+zone->w, zone->y+zone->h, zone->x, zone->y+zone->h);
 	SDL_RenderDrawLine(renderer, zone->x, zone->y+zone->h, zone->x , zone->y);
 
+	//on remet la couleur par défaut noire
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
