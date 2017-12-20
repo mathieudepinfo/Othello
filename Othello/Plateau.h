@@ -12,10 +12,8 @@
 #include "Othello.h"
 #include "Consts.h"
 #include "IA_ab.h"
-
+#include "IterativeDeepening.h"
 #include <vector>
-
-#include "Interface.h"
 
 /**
  * Classe représentant un plateau de jeu associé à un damier, un plateau est clickable s'il représente une partie en cours
@@ -25,15 +23,35 @@
  * -mentor est la case ou jouerait l'IA
  * -joueur est le joueur qui doit jouer le prochain coup
  * -autoriseMentor, autoriseRetour et autoriseAide sont des indicateurs utiles lors de l'affichage
+ * -typePartie est le type de partie en cours sur le plateau JVJ , JVSIA, IAVSIA
+ * -difficulte représente le niveau de l'IA
  */
+
+
 class Plateau : public ObjetGraphique
 {
 	
 private:
+
+	class Plat_Save {
+		Damier* damier;
+		int joueur;
+
+	public:
+		Plat_Save(const Plateau& p);
+		void load(Plateau* p);
+		~Plat_Save();
+	};
+
+	std::vector<Plat_Save*>* historique;
 	Damier* damier;
 	BanqueImage* banque;
 	TTF_Font* police;
 	int mentor;
+	int typePartie;
+	int difficulte;
+
+	static int coupActuel;
 
 public:
 
@@ -44,15 +62,17 @@ public:
 	int joueur;
 
 	//Constructeurs
-	Plateau(SDL_Rect* z, BanqueImage* bq);
+	Plateau(SDL_Renderer* r,SDL_Rect* z, BanqueImage* bq);
 
-	Plateau(Damier* damier, SDL_Rect* z, BanqueImage* bq);
+	Plateau(SDL_Renderer* r,Damier* damier, SDL_Rect* z, BanqueImage* bq);
+
+	Plateau(const Plateau&);
 
 	//Destructeur
 	~Plateau();
 
 	//fonction d'affichage
-	void render(SDL_Renderer* renderer);
+	void render() override;
 	
 	/**
 	 * retourne via i et j les coordonnées case clickée
@@ -68,14 +88,14 @@ public:
 		damier=dam;
 	}
 	
-	Damier* getDamier() {
+	Damier* getDamier()const {
 		return damier;
 	}
 	
 	/**
 	 * Fonction qui affiche un texte en fin de partie sur renderer
 	 */
-	void afficheScore(SDL_Renderer* renderer);
+	void afficheScore();
 
 	/**
 	 * Met à jour le mentor, mentor qui joueura avec une profondeur "prof"
@@ -83,9 +103,35 @@ public:
 	void setMentor(char prof) {
 		alphaBeta(*damier, joueur, prof, MINI, MAXI, mentor);
 	}
+	
+	void setDifficulte(char diff) {
+		difficulte = diff;
+	}
+	void setTypePartie(int type) {
+		typePartie = type;
+	}
 
+	int getTypePartie() {
+		return typePartie;
+	}
+	
 	void changeJoueur() {
 		joueur = 3 - joueur;
 	}
+
+	void callback(const SDL_Event& e) override;
+
+	void demarrePartie(int type);
+
+	/*Fonction qui retourne un vecteur contenant tous les pions qui se retourneraient si on joue en (k,l)*/
+	std::vector<int> getRetournements(int k, int l);
+
+	/*L'IA joue le coup suivant */
+	void joueTourIA();
+	/*Le joueur joue en (i,j) , retourne un booléen qui indique si le coup a été joué ou non*/
+	bool joueTourJ(int i, int j);
+
+	void dejoueCoup(int n_coups);
+
 };
 

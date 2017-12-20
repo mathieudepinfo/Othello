@@ -31,13 +31,14 @@ MenuPrincipal::~MenuPrincipal()
 
 ///=========================================
 
-void MenuPrincipal::actualise() {
+void MenuPrincipal::render() {
 	//on nettoie le renderer
 	SDL_RenderClear(renderer);
-
+	
 	//on copie tout les objets dans le renderer
 	for (auto obj : *items) {
-		obj->render(renderer);
+		
+		obj->render();
 	}
 
 	renderFocus();
@@ -55,7 +56,22 @@ void MenuPrincipal::addItem(ObjetGraphique * obj)
 
 ///=========================================
 
-ObjetGraphique* MenuPrincipal::getObjectOnMouseClick(SDL_Event& event) {
+void MenuPrincipal::addItems(int nombreItems,...)
+{
+	va_list itemsToAdd;
+	va_start(itemsToAdd,nombreItems);
+
+	ObjetGraphique* obj;
+
+	for (int i = 0; i < nombreItems; i++) {
+		obj = va_arg(itemsToAdd, ObjetGraphique*);
+		addItem(obj);
+	}
+}
+
+///=========================================
+
+ObjetGraphique* MenuPrincipal::getObjectOnEvent(SDL_Event& event) {
 
 	//on récupère les coordonnées du click
 	int x = event.button.x;
@@ -63,16 +79,30 @@ ObjetGraphique* MenuPrincipal::getObjectOnMouseClick(SDL_Event& event) {
 
 	//on choisis le bon objet
 	for (auto obj : *items) {
-		if (obj->clickable) {//on ne peut retourner que les objets clickable
-			if (obj->isInZone(x, y)) {
-				//si un objet prend le focus on l'indique
-				if(event.type == SDL_MOUSEBUTTONUP) focusedObject = obj;
-				return obj;
-			}
+	
+		if (obj->isInZone(x, y) && obj->isClickable()) {
+		//si un objet prend le focus on l'indique
+			if(event.type == SDL_MOUSEBUTTONUP) focusedObject = obj;
+			return obj;
 		}
 	}
-
+	
 	return nullptr;
+}
+
+///=========================================
+
+void MenuPrincipal::onEvent(SDL_Event& e) {
+	ObjetGraphique* obj = getObjectOnEvent(e);
+	if (obj != nullptr) {
+		obj->callback(e);
+	}
+	else if (focusedObject != nullptr)
+	{
+		focusedObject->callback(e);
+	}
+
+	render();
 }
 
 ///=========================================

@@ -3,6 +3,7 @@
 ///================Fichier contenant l'algorithme Alpha Beta avec mémoire==========================
 
 #include "IA_main.h"
+#include <time.h>
 
 /**
  * @brief fonction qui retourne la valeur d'un état,version améliorée de alphabeta qui utilise une table de transposition
@@ -16,5 +17,5 @@
  * @param heuristique la fonction d'évalluation à utiliser
  * @return un entier qui correspond à la valeur de l'état selon une heuristique donnée
  */
-int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,int (*heuristique)(Damier&,int), bool maxnode = true);
+int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,int& coup,int (*heuristique)(Damier&,int), time_t tmax, time_t t0, bool maxnode = true);
 

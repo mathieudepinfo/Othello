@@ -15,7 +15,7 @@ bool estValide(Damier& damier,int joueur,int k,int l)
     }
 
     //s'il y a deja un jeton sur la case
-    if(damier.getV(k,l)==1 || damier.getV(k,l)==2){
+    if(damier.getV(k,l)!=0){
         return false;
     }
 

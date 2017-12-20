@@ -24,8 +24,6 @@ void joueTour(MenuPrincipal* fenetre, Plateau* plateau, int joueur,int difficult
 		joueIAVSIA(fenetre, plateau, difficulte);
 	}
 
-
-	
 	if (joueur == plateau->joueur) { //joueur représente le joueur humain, plateau->joueur représente le joueur qui doit jouer le prochain coup 
 		if (estValide(*plateau->getDamier(), plateau->joueur, -1)) { i = -1; j = 0; }
 
@@ -72,6 +70,8 @@ void joueTour(MenuPrincipal* fenetre, Plateau* plateau, int joueur,int difficult
 	
 }
 
+///==========================================================
+
 void joueIAVSIA(MenuPrincipal* fenetre, Plateau* plateau, int difficulte) {
 
 	int i(-1), j(0);
@@ -103,6 +103,8 @@ void joueIAVSIA(MenuPrincipal* fenetre, Plateau* plateau, int difficulte) {
 	plateau->autoriseMentor = true;
 	fenetre->actualise();
 }
+
+///==========================================================
 
 void getRetournements(std::vector<int>& coups,const Damier& dam, int joueur, int k, int l) {
 	Damier damier = Damier(dam); //on travaille sur une copie

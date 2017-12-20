@@ -151,13 +151,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BanqueImage.cpp" />
-    <ClCompile Include="Bouton.cpp" />
     <ClCompile Include="Damier.cpp" />
     <ClCompile Include="IA_ab.cpp" />
     <ClCompile Include="IA_abTT.cpp" />
     <ClCompile Include="IA_main.cpp" />
     <ClCompile Include="IA_MTDf.cpp" />
-    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="IterativeDeepening.cpp" />
     <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="ObjetGraphique.cpp" />
@@ -172,11 +170,11 @@
     <ClInclude Include="Bouton.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="Damier.h" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="IA_ab.h" />
     <ClInclude Include="IA_abTT.h" />
     <ClInclude Include="IA_main.h" />
     <ClInclude Include="IA_MTDf.h" />
-    <ClInclude Include="Interface.h" />
     <ClInclude Include="IterativeDeepening.h" />
     <ClInclude Include="MenuPrincipal.h" />
     <ClInclude Include="ObjetGraphique.h" />

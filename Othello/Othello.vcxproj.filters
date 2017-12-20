@@ -39,9 +39,6 @@
     <ClCompile Include="Damier.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Interface.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Othello.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -52,9 +49,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="BanqueImage.cpp">
-      <Filter>classesGraphiques\Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Bouton.cpp">
       <Filter>classesGraphiques\Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Plateau.cpp">
@@ -84,9 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Damier.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Interface.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Othello.h">
@@ -130,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="IA_ab.h">
       <Filter>algorithmesIA\Fichiers d%27en tête</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

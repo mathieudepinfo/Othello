@@ -1,29 +1,47 @@
 #include "BanqueImage.h"
-#include <iostream>
-#include <map>
+#ifndef WIN32
+#include <unistd.h>
+#endif
 
-BanqueImage::BanqueImage(SDL_Renderer* renderer)
+BanqueImage::BanqueImage(SDL_Renderer* rend)
 {
-	this->images = new std::map<std::string,SDL_Texture*>();
-	this->renderer = renderer;
+	images = new std::map<std::string,SDL_Texture*>();
+	renderer = rend;
 
-	//////////ajouter des images ici si besoin////////////////////////
-	this->ajouteImage(std:: string("plateau"),		std::string("Plateau.bmp"));
-	this->ajouteImage(std::string("boutonIAVSIA"),	std::string("BoutonIAVSIA.bmp"));
-	this->ajouteImage(std::string("boutonJVJ"),		std::string("BoutonJVJ.bmp"));
-	this->ajouteImage(std::string("boutonJVSIA"),	std::string("BoutonJVSIA.bmp"));
-	this->ajouteImage(std::string("boutonFacile"),	std::string("BoutonFacile.bmp"));
-	this->ajouteImage(std::string("boutonMoyen"),	std::string("BoutonMoyen.bmp"));
-	this->ajouteImage(std::string("boutonDur"),		std::string("BoutonDur.bmp"));
-	this->ajouteImage(std::string("pionBlanc"),		std::string("pionBlanc.bmp"));
-	this->ajouteImage(std::string("pionNoir"),		std::string("pionNoir.bmp"));
-	this->ajouteImage(std::string("possible"),		std::string("possible.bmp"));
-	this->ajouteImage(std::string("vide"),			std::string("vide.bmp"));
-	this->ajouteImage(std::string("mentor"),		std::string("mentor.bmp"));
-	this->ajouteImage(std::string("retourBlanc"), std::string("retourBlanc.bmp"));
-	this->ajouteImage(std::string("retourNoir"), std::string("retourNoir.bmp"));
-	this->ajouteImage(std::string("boutonBlanc"), std::string("BoutonBlanc.bmp"));
-	this->ajouteImage(std::string("boutonNoir"), std::string("BoutonNoirs.bmp"));
+#ifdef WIN32
+	char* source = new char[1000];
+	GetCurrentDirectoryA(1000, source);
+	std::string repertoireImages = std::string(source) + std::string("/images/");
+	DIR * rep = opendir(repertoireImages.c_str());
+	
+#endif
+#ifndef WIN32
+	char* source = new char[1000];
+	getcwd(source);
+	std::string repertoireImages = std::string(source) + std::string("/images/");
+	DIR * rep = opendir(repertoireImages.c_str());
+#endif
+
+	if (rep == NULL) {
+		std::cerr << "cannot open : " << repertoireImages.c_str() << std::endl;
+
+	}
+	else {
+		struct dirent* file = NULL;
+		std::string nom;
+		while ((file = readdir(rep)) != NULL) {
+			//////////ajouter des images ici si besoin////////////////////////
+			nom = std::string(file->d_name);
+			try {
+				nom = nom.substr(0, nom.find_first_of('.'));
+				ajouteImage(nom, file->d_name);
+			}
+			catch (const char* e) {
+				puts(e);
+			}
+			
+		}
+	}
 }
 
 ///============================================
@@ -45,9 +63,15 @@ BanqueImage::~BanqueImage()
 	
 	 if (find(names.begin(), names.end(), nom) == names.end()) { //si l'image n'est pas déja chargée
 		 names.push_back(nom);
-		 std::cout << "Load in bank : " << fichier.c_str()<<std::endl;
-		 SDL_Surface* im = SDL_LoadBMP(fichier.c_str());
-		 (*images)[nom] = SDL_CreateTextureFromSurface(renderer,im);
+		 
+		 SDL_Surface* im = SDL_LoadBMP( (std::string("images/")+fichier).c_str());
+		 
+		 puts(SDL_GetError());
+		 if (im != NULL) {
+			 puts(nom.c_str());
+			 (*images)[nom] = SDL_CreateTextureFromSurface(renderer, im);
+			 puts(SDL_GetError());
+		 }
 		 SDL_FreeSurface(im);
 
 		 return (*images)[nom];

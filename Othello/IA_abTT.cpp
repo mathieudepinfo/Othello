@@ -2,19 +2,22 @@
 
 using namespace std;
 
-int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta, int (*heuristique)(Damier&, int),bool maxnode)
+int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,int& coup, int (*heuristique)(Damier&, int), time_t tmax, time_t t0,bool maxnode)
 {
 
-    int best,v,meilleurcoup(-10),a,b;
+	if ( (time(NULL) - t0) > tmax) {
+		throw "fini";
+	}
+    int best,v,a,b,mc(-10);
 
     //on regarde si le noeud est dans la table
-    unsigned int lcle=hashage(damier,joueur);
-    unsigned int cle=lcle%TABLE_SIZE;
+    unsigned long int lcle=hashage(damier,joueur);
+    unsigned int cle=static_cast<unsigned int>(lcle) % TABLE_SIZE;
 
     if((ttable.isIn(cle))				//si la cle est dans la table
     && (ttable[cle]->getK() == lcle)	//si la cle réelle correspond bien
     && (ttable[cle]->getD() >= prof)){	//si la profondeur restante est plus petite que lors du stockage des données
-
+		
         if(ttable[cle]->getL() >= beta) return ttable[cle]->getL();	
         if(ttable[cle]->getU() <= alpha) return ttable[cle]->getU();
 
@@ -23,7 +26,7 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
     }
 
 
-    if(prof == 0){
+    if(prof == 0 || testFin(damier)){
         return heuristique(damier,joueur);
     }
 
@@ -37,7 +40,7 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
         a=alpha;
 
 		possibilites(*coups, damier, joueur);
-
+		
 		int k(-1),l(0);
         for(auto c : *coups){
 			k = c / 10;
@@ -45,13 +48,13 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
             Damier* fils=new Damier(damier);
             joueCoup(*fils,joueur,k,l);
 
-            v=alphaBetaTT(ttable,*fils,joueur,prof-1,a,beta,heuristique,false);
+            v=alphaBetaTT(ttable,*fils,joueur,prof-1,a,beta,mc,heuristique,tmax,t0,false);
 
             delete fils;
 
             if(v>best){
                 best=v;
-                meilleurcoup=c;
+                coup=c;
 				
             }
 
@@ -71,7 +74,7 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
         b=beta;
 
 		possibilites(*coups, damier, 3 - joueur);
-        
+		
 		int k(-1),l(0);
         for(auto c : *coups){
 
@@ -81,13 +84,13 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
             Damier* fils=new Damier(damier);
             joueCoup(*fils,3-joueur,k,l);
 
-            v=alphaBetaTT(ttable,*fils,joueur,prof-1,alpha,b,heuristique,true);
+            v=alphaBetaTT(ttable,*fils,joueur,prof-1,alpha,b,mc,heuristique,tmax,t0,true);
 
             delete fils;
 
             if(v<best){
                 best=v;
-                meilleurcoup=c;
+                coup=c;
 				
             }
 
@@ -104,13 +107,13 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
 
 	//on stocke les infos dans la table
     if(best<=alpha){
-        ttable.store(cle,lcle,prof,meilleurcoup,best,'l'); 
+        ttable.store(cle,lcle,prof,coup,best,'l'); 
     }
     else if(best>=beta){
-        ttable.store(cle,lcle,prof,meilleurcoup,best,'u');
+        ttable.store(cle,lcle,prof,coup,best,'u');
     }
     else{
-        ttable.store(cle,lcle,prof,meilleurcoup,best,'e');
+        ttable.store(cle,lcle,prof,coup,best,'e');
     }
 
 	

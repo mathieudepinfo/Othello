@@ -5,6 +5,7 @@
 #include "SDL.h"
 
 #include <vector>
+#include <stdarg.h>
 
 #include "ObjetGraphique.h"
 #include "BanqueImage.h"
@@ -47,14 +48,29 @@ public:
 
 	~MenuPrincipal();
 
-	void actualise();
+	/**
+	 * Fonction appelée dès qu'un event est reçu 
+	 */
+	void onEvent(SDL_Event& e);
 
+	/**
+	 * Fonction d'affichage qui affiche tous les "items"
+	 */
+	void render();
+
+	/*ajoute obj à items*/
 	void addItem(ObjetGraphique* obj);
 
-	ObjetGraphique* getObjectOnMouseClick(SDL_Event& event);
+	/*ajoute plusieurs items*/
+	void addItems(int nombreItems,...);
 
+	/*Permet de récuperer l'objet concerné par l'event */
+	ObjetGraphique* getObjectOnEvent(SDL_Event& event);
+
+	/*Fonction d'accès à la banque d'images*/
 	SDL_Texture* getTexture(std::string name);
 
+	/*Foncion d'affichage du focus prend la forme d'un contour jaune*/
 	void renderFocus();
 
 	BanqueImage* getBanque() {

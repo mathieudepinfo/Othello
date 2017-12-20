@@ -1,11 +1,9 @@
 #include "IA_ab.h"
 
-using namespace std;
-
 int alphaBeta(Damier& damier,int joueur,char prof,int alpha,int beta,int& meilleurcoup,bool maxnode)
 {
 
-    vector<int>* coups=new vector<int>();
+    std::vector<int>* coups=new std::vector<int>();
     int best,v,mc; //best est notre meilleur score, v la valeur retournée par alphabeta, mc le meilleurcoup
 
     //si on a atteint une feuille de l'arbre

@@ -67,6 +67,8 @@ void playerVSIA(int player)
 
 }
 
+///====================================================
+
 void partieIAVSIA(char prof)
 {
 
@@ -100,10 +102,8 @@ void partieIAVSIA(char prof)
 
         if(joueur==1){
 
-			printf("avec memoire :");
-			 //c=joueCoupIA2(*dam,joueur,prof,i);
-			alphaBetaTT(*ttable,*dam,joueur,prof,MINI,MAXI,heuristiqueMilieuDePartie);
-			c=(*ttable)[hashage(*dam,joueur)%TABLE_SIZE]->getC();
+			puts("AlphabetaTT");
+			alphaBetaTT(*ttable, *dam, joueur, prof, MINI, MAXI, c,heuristiqueMilieuDePartie, time(NULL) + 5, time(NULL));
 			printf("%d %d \n",(*ttable)[hashage(*dam,joueur)%TABLE_SIZE]->getL(),(*ttable)[hashage(*dam,joueur)%TABLE_SIZE]->getU());
 			delete ttable;
 			ttable = new Table();
@@ -111,10 +111,8 @@ void partieIAVSIA(char prof)
 
         else{
             printf("MTD \n");
-            //c=joueCoupIA2(*dam,joueur,prof,i);
             tmax=1;
-            c=ID(tmax,prof+10,*dam,*ttable2,joueur);
-
+            c=ID(tmax,prof,*dam,*ttable2,joueur);
 			delete ttable2;
 			ttable2 = new Table();
 

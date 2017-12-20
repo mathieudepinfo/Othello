@@ -1,82 +1,77 @@
 #pragma once
 
-///=============================Fichier contenant la classe Bouton et ses dérivées=============
+///=============================Fichier contenant la classe Bouton=============
 
 #include "Consts.h"
 #include "SDL.h"
-
-#include "Damier.h"
-
 #include "ObjetGraphique.h"
-#include "Plateau.h"
-
-class Plateau;
-
+#include <functional>
 /**
- * Classe qui représente un bouton sans action, étend la classe ObjetGraphique, pas de classe virtuelle action car paramètres différents
- * En soi cette classe ne fournit qu'un destructeur commun et pourrait ne pas exister mais elle donne du sens au code
+ * Classe qui représente un bouton, étend la classe ObjetGraphique
  */
 class Bouton:public ObjetGraphique
 {
+private:
+	
+	std::function<void()> actionFunction;
 
 public:
-	//Constructeurs
-	Bouton(SDL_Texture* im, SDL_Rect* zone);
+	SDL_Texture* imageDown; //possibilité de rajouter une image à afficher lors d'un click
 
-	Bouton(SDL_Texture* im,int anchorx, int anchory, int width, int height);
+	//Constructeurs
+	
+	Bouton(SDL_Renderer* r, SDL_Texture* im, SDL_Texture* imd, std::function<void()> f, SDL_Rect* zone)
+		:ObjetGraphique(r, im, zone), actionFunction(f), imageDown(imd)
+	{
+		type = BOUTON; clickable = true; 
+	}
+	
+	Bouton(SDL_Renderer* r, SDL_Texture* im, SDL_Texture* imd, std::function<void()> f, int anchorx, int anchory, int width, int height)
+		:ObjetGraphique(r, im,anchorx, anchory, width, height), actionFunction(f),imageDown(imd)
+	{ 
+		clickable = true; type = BOUTON;
+	}
 
 	//Destructeur
-	~Bouton();
+	~Bouton() override {
+		delete zone;
+	}
 
 	//Fonction d'affichage
-	void render(SDL_Renderer* renderer);
 
-};
-
-/**
- * Bouton qui représente un niveau de difficulté via son attribut pmax
- */
-class BoutonNiveau : public Bouton
-{
-
-	int pmax; //profondeur max de jeu de l'IA
-
-public:
-	//Constructeurs
-	BoutonNiveau(SDL_Texture* im, SDL_Rect* zone, int p) :Bouton(im, zone), pmax(p) { type = BOUTON_NIVEAU; };
-
-	BoutonNiveau(SDL_Texture* im, int anchorx,int anchory,int width,int height, int p) :Bouton(im, anchorx,anchory,width,height), pmax(p) { type = BOUTON_NIVEAU; };
-
-	//action liée au bouton
-	void action(int& difficulte) {
-		difficulte = pmax;
+	void render() override{
+		if (visible) {
+		SDL_RenderCopy(renderer, image, NULL, zone);
+		}
 	}
-};
+	
+	void callback(const SDL_Event& e) override
+	{
+		
+		switch (e.type) {
+		case SDL_MOUSEBUTTONDOWN:
+			SDL_Texture* tmp = image;
+			if (imageDown != nullptr) image = imageDown;
+			render();
+			SDL_RenderPresent(renderer);
+			SDL_Delay(150);
+			image = tmp;
+			actionFunction();
+			break;
+		}
 
-/**
-* Bouton qui permet de démarrer une partie
-*/
-class BoutonStart : public Bouton
-{
-private:
-	int typePartie; //les types possibles sont JVJ IAVSIA et JVSIA
-public:
+		
+	}
 
-	//Constructeurs
-	BoutonStart(SDL_Texture* im, SDL_Rect* zone,int partie) :Bouton(im, zone),typePartie(type){ type = BOUTON_START; };
+	void makeVisible() override
+	{
+		clickable = true;
+		visible = true;
+	}
 
-	BoutonStart(SDL_Texture* im,int partie, int anchorx, int anchory, int width, int height) :Bouton(im, anchorx, anchory, width, height),typePartie(partie){ type = BOUTON_START; };
-
-	/**
-	 * Démarre une partie sur l'objet plateau associé
-	 * @param plateau le plateau de jeu
-	 * @param j le joueur si partie contre IA
-	 * @param type le type de partie
-	 * @param fenetre la fenetre qui contient plateau
-	 */
-	void action(Plateau* plateau,int& type);
-
-	int getType()const {
-		return typePartie;
+	void makeInvisible() override
+	{
+		clickable = false;
+		visible = false;
 	}
 };

@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include "dirent.h"
 
 /**
  * Classe qui contient toutes les images de l'interface (voir constructeur)
