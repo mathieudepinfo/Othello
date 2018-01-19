@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,int& coup, int (*heuristique)(Damier&, int), time_t tmax, time_t t0,bool maxnode)
+int alphaBetaTT(Table& ttable,const Damier& damier,int joueur,char prof,int alpha,int beta,int& coup, int (*heuristique)(const Damier&, int), time_t tmax, time_t t0,bool maxnode)
 {
 
 	if ( (time(NULL) - t0) > tmax) {
@@ -11,7 +11,7 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
     int best,v,a,b,mc(-10);
 
     //on regarde si le noeud est dans la table
-    unsigned long int lcle=hashage(damier,joueur);
+    unsigned long lcle=hashage(damier,joueur);
     unsigned int cle=static_cast<unsigned int>(lcle) % TABLE_SIZE;
 
     if((ttable.isIn(cle))				//si la cle est dans la table
@@ -21,16 +21,15 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
         if(ttable[cle]->getL() >= beta) return ttable[cle]->getL();	
         if(ttable[cle]->getU() <= alpha) return ttable[cle]->getU();
 
-        alpha=maxi(alpha,ttable[cle]->getL());
-        beta=mini(beta,ttable[cle]->getU());
+        alpha = maxi(alpha,ttable[cle]->getL());
+        beta = mini(beta,ttable[cle]->getU());
     }
-
 
     if(prof == 0 || testFin(damier)){
         return heuristique(damier,joueur);
     }
 
-	vector<int>* coups=new vector<int>();
+	vector<int> coups;
 
     if(maxnode){
 
@@ -39,10 +38,10 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
         //ici on ne peut pas modifier directement alpha car on en a besoin a la fin
         a=alpha;
 
-		possibilites(*coups, damier, joueur);
+		possibilites(coups, damier, joueur);
 		
 		int k(-1),l(0);
-        for(auto c : *coups){
+        for(auto c : coups){
 			k = c / 10;
 			l = c % 10;
             Damier* fils=new Damier(damier);
@@ -73,10 +72,10 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
         v=MAXI;
         b=beta;
 
-		possibilites(*coups, damier, 3 - joueur);
+		possibilites(coups, damier, 3 - joueur);
 		
 		int k(-1),l(0);
-        for(auto c : *coups){
+        for(auto c : coups){
 
 			k = c / 10;
 			l = c % 10;
@@ -115,9 +114,6 @@ int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int 
     else{
         ttable.store(cle,lcle,prof,coup,best,'e');
     }
-
-	
-	delete coups;
 
     return best;
 }

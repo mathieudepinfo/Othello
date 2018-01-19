@@ -1,6 +1,6 @@
 #include "Othello.h"
 
-bool estValide(Damier& damier,int joueur,int k,int l)
+bool estValide(const Damier& damier,int joueur,int k,int l)
 {
     //si on souhaite passer
     if(k<0){
@@ -96,7 +96,7 @@ void joueCoup(Damier& damier,int joueur, int k,int l)
 
 ///=====================================================================
 
-bool testFin(Damier& damier)
+bool testFin(const Damier& damier)
 {
     for(int joueur(1);joueur<3;++joueur){
         for(int i(0);i<8;i++){
@@ -113,7 +113,7 @@ bool testFin(Damier& damier)
 
 ///=====================================================================
 
-int score(Damier& damier, int joueur)
+int score(const Damier& damier, int joueur)
 {
     int cpt(0);
     for(int i(0);i<8;i++){

@@ -1,9 +1,9 @@
 #include "IA_ab.h"
 
-int alphaBeta(Damier& damier,int joueur,char prof,int alpha,int beta,int& meilleurcoup,bool maxnode)
+int alphaBeta(const Damier& damier,int joueur,char prof,int alpha,int beta,int& meilleurcoup,bool maxnode)
 {
 
-    std::vector<int>* coups=new std::vector<int>();
+    std::vector<int> coups;
     int best,v,mc; //best est notre meilleur score, v la valeur retournée par alphabeta, mc le meilleurcoup
 
     //si on a atteint une feuille de l'arbre
@@ -17,9 +17,9 @@ int alphaBeta(Damier& damier,int joueur,char prof,int alpha,int beta,int& meille
         v=MINI;
 
         //on actualise coups pour contenir les coups possibles,
-        possibilites(*coups,damier,joueur);
+        possibilites(coups,damier,joueur);
 		int i(-1), j(0);
-        for(auto c : *coups){
+        for(auto c : coups){
 
 			i = c / 10;
 			j = c % 10;
@@ -48,9 +48,9 @@ int alphaBeta(Damier& damier,int joueur,char prof,int alpha,int beta,int& meille
         v=MAXI;
 
         //cette fois on prend les possibilités de l'adversaire
-        possibilites(*coups,damier,3-joueur);
+        possibilites(coups,damier,3-joueur);
 		int i(-1), j(0);
-        for(auto c : *coups){
+        for(auto c : coups){
 
 			i = c / 10;
 			j = c % 10;
@@ -73,8 +73,6 @@ int alphaBeta(Damier& damier,int joueur,char prof,int alpha,int beta,int& meille
             }
         }
     }
-
-	delete coups;
 
     meilleurcoup=mc;
 

@@ -141,5 +141,5 @@ public:
   *@param Damier& damier est l'état à hasher
   *@param int joueur est le joueur qui doit joueur le prochain coup
   */
-unsigned long hashage(Damier& damier,int joueur);
+unsigned long hashage(const Damier& damier,int joueur);
 

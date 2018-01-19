@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int ID(time_t tmax,char pmax,Damier& damier,Table& ttable,int joueur){
+int ID(time_t tmax,char pmax,const Damier& damier,Table& ttable,int joueur){
 
     int prof(1),mc(-10),mctmp(-10);		
     int score[2]={0,0}; //score pour les profondeurs paires et impaires
@@ -27,8 +27,6 @@ int ID(time_t tmax,char pmax,Damier& damier,Table& ttable,int joueur){
             ttable=*table_tmp;
         }
 
-        //mc=ttable[hashage(damier,joueur)%TABLE_SIZE]->getC(); //on récupère le meilleur coup dans la table
-
         delete table_tmp;
 
         if(prof>=pmax || (time(NULL)-t0)>tmax){ //condition d'arrêt
@@ -40,7 +38,7 @@ int ID(time_t tmax,char pmax,Damier& damier,Table& ttable,int joueur){
         printf("%d\n ",ttable[hashage(damier,joueur)%TABLE_SIZE]->getC());
 
         printf("\n");
-        prof++;
+        ++prof;
 
     }
 

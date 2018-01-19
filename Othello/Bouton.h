@@ -41,7 +41,7 @@ public:
 
 	void render() override{
 		if (visible) {
-		SDL_RenderCopy(renderer, image, NULL, zone);
+			SDL_RenderCopy(renderer, image, NULL, zone);
 		}
 	}
 	

@@ -20,10 +20,10 @@
  * -damier est le damier encapsulé dans Plateau, c'est sur ce damier que se déroule la partie
  * -banque est la banque d'image qui contient les images des pions (noir, blanc, mentor ...)
  * -police est la police de caractères lors de l'affichage du vainqueur en fin de partie
- * -mentor est la case ou jouerait l'IA
+ * -mentor est la case ou jouerait l'IA à notre place
  * -joueur est le joueur qui doit jouer le prochain coup
  * -autoriseMentor, autoriseRetour et autoriseAide sont des indicateurs utiles lors de l'affichage
- * -typePartie est le type de partie en cours sur le plateau JVJ , JVSIA, IAVSIA
+ * -typePartie est le type de partie en cours sur le plateau : JVJ , JVSIA, IAVSIA
  * -difficulte représente le niveau de l'IA
  */
 
@@ -33,6 +33,10 @@ class Plateau : public ObjetGraphique
 	
 private:
 
+	/**
+	 * Petite classe encapsulant un damier et un int qui représente l'état du plateau
+	 * utile pour l'historique de la partie
+	 */
 	class Plat_Save {
 		Damier* damier;
 		int joueur;

@@ -15,5 +15,5 @@
  *@param tmax
  *@param t0
  */
-int MTD(int& f,Table& ttable,Damier& root,int joueur,char prof,int& coup,int (*heuristique)(Damier&,int),time_t tmax,time_t t0);
+int MTD(int& f,Table& ttable,const Damier& root,int joueur,char prof,int& coup,int (*heuristique)(const Damier&,int),time_t tmax,time_t t0);
 

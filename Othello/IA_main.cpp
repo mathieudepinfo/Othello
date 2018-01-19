@@ -1,15 +1,15 @@
 #include "IA_main.h"
 
 
-void possibilites(std::vector<int>& coups,Damier& damier,int joueur)
+void possibilites(std::vector<int>& coups,const Damier& damier,int joueur)
 {
  
+	int coup_a_ajouter;
     //on teste le passage de tour
     if(estValide(damier,joueur,-1)){
 		
-		int coup;
-		coup = -10;
-		coups.push_back(coup);
+		coup_a_ajouter = -10;
+		coups.push_back(coup_a_ajouter);
         return;
     }
     else{
@@ -17,9 +17,9 @@ void possibilites(std::vector<int>& coups,Damier& damier,int joueur)
         for(int i(0);i<8;++i){
             for(int j(0);j<8;++j){
                 if(estValide(damier,joueur,i,j)){
-					int coup = i*10+j;
+					coup_a_ajouter = i*10+j;
 
-					coups.push_back(coup); //si le coup est valide on l'ajoute   
+					coups.push_back(coup_a_ajouter); //si le coup est valide on l'ajoute   
                 }
             }
         }
@@ -41,7 +41,8 @@ bool inList(int i,int j,std::vector<int*>& coups)
 ///=====================================================================
 
 int coefMobi(int nombrePionsTotal) {
-
+	//les valeurs ont été choisies arbitrairement
+	//en partant du principe que sur la fin de partie la mobilité est moins importante
 	switch (nombrePionsTotal / 10) {
 	case 0:
 		return 5;
@@ -61,7 +62,7 @@ int coefMobi(int nombrePionsTotal) {
 
 ///=====================================================================
 
-int deltaMobilite(Damier& damier, int joueur) {
+int deltaMobilite(const Damier& damier, int joueur) {
 
 	int cpt1(0), cpt2(0);
 
@@ -81,7 +82,7 @@ int deltaMobilite(Damier& damier, int joueur) {
 
 ///=====================================================================
 
-int heuristiqueMilieuDePartie(Damier& damier, int joueur)
+int heuristiqueMilieuDePartie(const Damier& damier, int joueur)
 {
 	static int dir[4][2] = { {-1,0},{1,0},{0,1},{0,-1} }; //représente les directions possibles (sans compter les diagonales)
 	static int coins[4][2] = { {0,0},{0,7},{7,7},{7,0} }; //représente les coins du damier
@@ -100,13 +101,12 @@ int heuristiqueMilieuDePartie(Damier& damier, int joueur)
 			{ 500 ,-150, 30, 10, 10, 30,-150, 500}
 	};
 
-	//controle des coins très importants en milieu de partie
-
+	////controle des coins très importants en milieu de partie////
 	int jc(0), ci(0), cj(0), di(0), dj(0);
 
 	for (int c(0); c < 4; ++c) {
 		ci = coins[c][0]; cj = coins[c][1];
-		jc = damier.getV(ci, cj);
+		jc = damier.getV(ci, cj); //jc = joueur qui controle le coin
 		if (jc != 0) {	//pour chaque coin, s'il est controlé on met à jour les valeurs des cases adjacentes
 			switch (c) {
 			case 0:	//coin en haut à gauche
@@ -159,6 +159,6 @@ int heuristiqueMilieuDePartie(Damier& damier, int joueur)
 
 ///=====================================================================
 
-int heuristiqueFinDePartie(Damier& damier, int joueur) {
+int heuristiqueFinDePartie(const Damier& damier, int joueur) {
 	return score(damier, joueur);
 }

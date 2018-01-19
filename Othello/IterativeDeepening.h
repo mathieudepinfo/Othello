@@ -13,5 +13,5 @@
  *@param Table& ttable une table de transposition
  *@param int joueur le joueur maximisant
  */
-int ID(time_t tmax,char pmax,Damier& damier,Table& ttable,int joueur);
+int ID(time_t tmax,char pmax,const Damier& damier,Table& ttable,int joueur);
 

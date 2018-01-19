@@ -12,6 +12,7 @@
  * -un attribut clickable 
  * -un attribut visible
  * -un attribut type
+ * -un renderer auquel sur lequel est affiché l'objet
  * Elle contient aussi un compteur statique auquel on accède via getCompteur et resetCompteur
  */
 
@@ -49,15 +50,16 @@ public:
 	//destructeur
 	virtual ~ObjetGraphique() {};
 
-	//fonction d'affichage, à implémenter dans les filles
+	//fonction d'affichage, à implémenter dans les classes filles
 	virtual void render() = 0;
 
 	virtual SDL_Rect* getZone() {
 		return zone;
 	}
-
+	/*Fonction définnissant la hitbox, pas besoin d'être redéfinie pour objets rectangulaires*/
 	virtual bool isInZone(int x, int y);
 
+	//fonction appelée lorsque qu'un event doit être traité par l'objet
 	virtual void callback(const SDL_Event &event)=0;
 
 	virtual void makeVisible();

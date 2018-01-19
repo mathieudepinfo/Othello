@@ -15,7 +15,9 @@
  * @param beta est la borne maximale de l'état
  * @param maxnode qui est vrai si on doit maximiser le score
  * @param heuristique la fonction d'évalluation à utiliser
+ * @param tmax et t0 des indicateurs de temps pour limiter le temps de recherche
  * @return un entier qui correspond à la valeur de l'état selon une heuristique donnée
  */
-int alphaBetaTT(Table& ttable,Damier& damier,int joueur,char prof,int alpha,int beta,int& coup,int (*heuristique)(Damier&,int), time_t tmax, time_t t0, bool maxnode = true);
+int alphaBetaTT(Table& ttable,const Damier& damier,int joueur,char prof,int alpha,int beta,int& coup,
+	int (*heuristique)(const Damier&,int), time_t tmax, time_t t0, bool maxnode = true);
 

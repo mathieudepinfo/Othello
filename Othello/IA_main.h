@@ -26,7 +26,7 @@ inline int mini(int a,int b){
  * @param damier état actuel
  * @param joueur le joueur qui est en train de jouer
  */
-void possibilites(std::vector<int>& coups,Damier& damier,int joueur);
+void possibilites(std::vector<int>& coups,const Damier& damier,int joueur);
 
 /**
  * retourne true si {i,j} est dans coups
@@ -39,9 +39,9 @@ bool inList(int i,int j,std::vector<int[2]>& coups);
   *@param int joueur
   *@return valeur de la position
 */
-int heuristiqueMilieuDePartie(Damier& damier,int joueur);
+int heuristiqueMilieuDePartie(const Damier& damier,int joueur);
 
-int heuristiqueFinDePartie(Damier& damier, int joueur);
+int heuristiqueFinDePartie(const Damier& damier, int joueur);
 
 int coefMobi(int nbPionTotal);
 

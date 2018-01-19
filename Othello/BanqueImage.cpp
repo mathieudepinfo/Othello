@@ -8,19 +8,17 @@ BanqueImage::BanqueImage(SDL_Renderer* rend)
 	images = new std::map<std::string,SDL_Texture*>();
 	renderer = rend;
 
-#ifdef WIN32
+
 	char* source = new char[1000];
+#ifdef WIN32
 	GetCurrentDirectoryA(1000, source);
-	std::string repertoireImages = std::string(source) + std::string("/images/");
-	DIR * rep = opendir(repertoireImages.c_str());
-	
 #endif
 #ifndef WIN32
-	char* source = new char[1000];
 	getcwd(source);
+#endif
 	std::string repertoireImages = std::string(source) + std::string("/images/");
 	DIR * rep = opendir(repertoireImages.c_str());
-#endif
+
 
 	if (rep == NULL) {
 		std::cerr << "cannot open : " << repertoireImages.c_str() << std::endl;
@@ -82,6 +80,6 @@ BanqueImage::~BanqueImage()
 
 ///============================================
 
-SDL_Texture* BanqueImage::getImage(std::string nom) {
+SDL_Texture* BanqueImage::getImage(const std::string& nom) {
 	return (*images)[nom];
 }

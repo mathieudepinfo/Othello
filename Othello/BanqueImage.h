@@ -34,7 +34,7 @@ public:
 	~BanqueImage();
 
 	//Membres get
-	SDL_Texture* getImage(std::string nom);
+	SDL_Texture* getImage(const std::string& nom);
 
 	SDL_Renderer* getRenderer() {
 		return renderer;

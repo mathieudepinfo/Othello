@@ -22,7 +22,7 @@ constexpr int TABLE_SIZE = 65536;
 
 //valeur de départ d'une partie
 constexpr int JOUEUR_INITIAL = 2;
-const int DAMIER_INITIAL[8][8] =
+constexpr int DAMIER_INITIAL[8][8] =
 {
 	{ 0,0,0,0,0,0,0,0 },
 	{ 0,0,0,0,0,0,0,0 },

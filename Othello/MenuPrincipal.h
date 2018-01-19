@@ -38,11 +38,8 @@ public:
 	
 	ObjetGraphique* focusedObject;
 
-	/**
-	 * Fonction statique qui permet de n'avoir qu'une instance de la classe au maximum
-	 */
-	static MenuPrincipal* getInstance() {
-		static MenuPrincipal* menu=new MenuPrincipal();
+	static MenuPrincipal& getInstance() {
+		static MenuPrincipal& menu=MenuPrincipal();
 		return menu;
 	}
 

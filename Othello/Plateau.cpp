@@ -105,7 +105,7 @@ void Plateau::render() {
 		damierc.setV(POSSIBLE, coup / 10, coup % 10);
 	}
 	
-	if (mentor != -10) damierc.setV(MENTOR, mentor / 10, mentor % 10);
+	if (autoriseMentor && mentor != -10) damierc.setV(MENTOR, mentor / 10, mentor % 10);
 
 	//copie chaque case dans le renderer
 	for (int i = 0; i < 8; ++i) {
@@ -216,18 +216,39 @@ void Plateau::callback(const SDL_Event& e) {
 
 	bool resetMentor(false);
 
-	switch (e.type) {
+	switch (typePartie) {
+		
+		case JVJ:
+			switch (e.type) {
+			case SDL_MOUSEBUTTONUP:
+				if (clickable) {
 
-	case SDL_MOUSEBUTTONUP:
-		if (clickable) {
-			switch (typePartie) {
-			case JVJ:
-				resetMentor= joueTourJ(i, j);
-				render();
+					resetMentor = joueTourJ(i, j);
+					render();
+					break;
+				}
+
+			case SDL_KEYDOWN:
+				int touche = e.key.keysym.sym;
+				if (touche == SDLK_h) {//mentor "h" pour help
+					setMentor(5);
+				}
+				else if (touche == SDLK_u) {// "u" pour undo
+					dejoueCoup(1);
+				}
 				break;
-			case JVSIA:
-				resetMentor = joueTourJ(i, j);
-	
+			}
+			break;
+
+		case JVSIA:
+			switch (e.type) {
+			case SDL_MOUSEBUTTONUP:
+				if (clickable) {
+
+					resetMentor = joueTourJ(i, j);
+					render();
+				}
+
 				if (resetMentor) mentor = -10;
 				else break;
 
@@ -238,49 +259,56 @@ void Plateau::callback(const SDL_Event& e) {
 				SDL_RenderPresent(renderer);
 
 				joueTourIA();
-				autoriseAide = true;autoriseRetour = true;autoriseMentor = true;
-				break;
-
-			case IAVSIA:
-				SDL_Event eve;
-				bool toEnd(false);
-				autoriseAide = false; autoriseRetour = false; autoriseMentor = false;
-				while (!testFin(*damier)) {
-					SDL_WaitEvent(&eve);
-					if (eve.type == SDL_QUIT)exit(-1);
-					if (eve.type == SDL_KEYDOWN && eve.key.keysym.sym == SDLK_a) return;
-					if (eve.type == SDL_KEYDOWN && eve.key.keysym.sym == SDLK_s) toEnd = false;
-					if (eve.type == SDL_KEYDOWN && eve.key.keysym.sym == SDLK_e) toEnd = true;
-					if (eve.type == SDL_MOUSEBUTTONDOWN || toEnd) {
-						joueTourIA();
-						render();
-						SDL_RenderPresent(renderer);
-						
-					}
-				}
-				
 				autoriseAide = true; autoriseRetour = true; autoriseMentor = true;
-				
+				break;
+			case SDL_KEYDOWN:
+				int touche = e.key.keysym.sym;
+				if (touche == SDLK_h) {//mentor "h" pour help
+					setMentor(5);
+				}
+				else if (touche == SDLK_u) {// "u" pour undo
+					dejoueCoup(1);
+				}
 				break;
 			}
-			
-		}
-		break;
+			break;
 
-	case SDL_KEYDOWN:
-		int touche = e.key.keysym.sym;
-		if (touche == SDLK_h) {
-			setMentor(5);
-		}
-		else if (touche == SDLK_u) {
-			dejoueCoup(1);
-		}
-		break;
-	}
+		case IAVSIA:
+				
+			bool toEnd(false);
+			autoriseAide = false; autoriseRetour = false; autoriseMentor = false;
+				
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_e) toEnd = true;
+
+			if (toEnd) {//mode automatque jusqu'à la fin
+				SDL_Event e2;
+				while (!testFin(*damier) && toEnd) {
+					SDL_PollEvent(&e2);
+							
+					if (e2.type == SDL_KEYDOWN && e2.key.keysym.sym == SDLK_a) return; //actualise l'affichage
+					if (e2.type == SDL_KEYDOWN && e2.key.keysym.sym == SDLK_s) toEnd = false; //arrête le mode automatique
+
+					joueTourIA();
+					render();
+					SDL_RenderPresent(renderer);
+				}
+			}
+			else if (e.type==SDL_MOUSEBUTTONUP){
+				joueTourIA();
+				render();
+				SDL_RenderPresent(renderer);
+			}
+			
+			autoriseAide = true; autoriseRetour = true; autoriseMentor = true;
+				
+			break;
+	}//fin switch typePartie 
 	
 	if (resetMentor) mentor = -10;
 	render();
 }
+
+///=====================================================
 
 void Plateau::demarrePartie(int type)
 {
@@ -294,7 +322,6 @@ void Plateau::demarrePartie(int type)
 	makeClickable();
 	joueur = JOUEUR_INITIAL;
 	setDamier(new Damier(DAMIER_INITIAL));
-	historique->push_back(new Plat_Save(*this));
 	typePartie=type;
 }
 
@@ -390,10 +417,10 @@ void Plateau::dejoueCoup(int n_Coups) {
 	if (coupActuel - n_Coups < historique->size() && coupActuel - n_Coups >= 0) {
 		(*historique)[coupActuel - n_Coups]->load(this);
 		std::cout << historique->size() << " " << coupActuel << std::endl;
-		for (int i = coupActuel - n_Coups + 2; i < historique->size(); ++i) {
+		for (int i = coupActuel - n_Coups; i < historique->size(); ++i) {
 			if((*historique)[i]!=nullptr) delete (*historique)[i];
 		}
-		historique->resize(coupActuel - n_Coups + 1);
+		historique->resize(coupActuel - n_Coups);
 		coupActuel -= n_Coups;
 	}
 	else {
@@ -402,6 +429,8 @@ void Plateau::dejoueCoup(int n_Coups) {
 	}
 
 }
+
+///============Fonctions de Plat_Save===========
 
 Plateau::Plat_Save::Plat_Save(const Plateau& p) {
 	damier = new Damier(*(p.getDamier()));

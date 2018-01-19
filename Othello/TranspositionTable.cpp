@@ -86,7 +86,7 @@ void Table::operator=(const Table& table) {
 
 ///=======================================================
 
-unsigned long hashage(Damier& damier,int joueur)
+unsigned long hashage(const Damier& damier,int joueur)
 {
     unsigned long res=0;
 

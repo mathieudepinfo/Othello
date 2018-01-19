@@ -11,7 +11,7 @@
   *@param int l numero de colonne
   *@return true si on peut jouer, false sinon
 */
-bool estValide(Damier& damier,int joueur,int k,int l=0);
+bool estValide(const Damier& damier,int joueur,int k,int l=0);
 
 /**
  *@brief joue le coup a la position (k,l), le coup doit prealablement avoir ete teste avec estValide
@@ -24,7 +24,7 @@ void joueCoup(Damier& damier,int joueur, int k,int l=0);
 *@brief test si la partie est finie
 *@return true si partie terminee,false sinon
 */
-bool testFin(Damier& damier);
+bool testFin(const Damier& damier);
 
 /**@brief retourne le nombre de pions de joueur sur Damier*/
-int score(Damier& damier, int joueur);
+int score(const Damier& damier, int joueur);

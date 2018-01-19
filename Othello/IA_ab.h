@@ -16,5 +16,5 @@
  * @param bool maxnode qui est vrai si on doit maximiser le score
  * @return un entier qui correspond à la valeur de l'état selon une heuristique donnée
  */
-int alphaBeta(Damier& damier,int joueur,char prof,int alpha,int beta,int& meilleurcoup,bool maxnode=true);
+int alphaBeta(const Damier& damier,int joueur,char prof,int alpha,int beta,int& meilleurcoup,bool maxnode=true);
 
