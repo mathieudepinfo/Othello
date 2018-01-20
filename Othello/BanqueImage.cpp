@@ -8,7 +8,7 @@ BanqueImage::BanqueImage(SDL_Renderer* rend)
 	images = new std::map<std::string,SDL_Texture*>();
 	renderer = rend;
 	
-	std::string repertoireImages =  std::string("../Othello/images/");
+	std::string repertoireImages =  std::string("images/");
 	DIR * rep = opendir(repertoireImages.c_str());
 
 	if (rep == NULL) {
