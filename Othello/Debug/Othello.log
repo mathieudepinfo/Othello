@@ -1,19 +1,5 @@
-﻿  TranspositionTable.cpp
-  Plateau.cpp
-c:\users\mathi\desktop\cpp\othello\othello\plateau.cpp(417): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\mathi\desktop\cpp\othello\othello\plateau.cpp(420): warning C4018: '<' : incompatibilité signed/unsigned
-  Partie.cpp
-  OthelloMain.cpp
-  Othello.cpp
-  ObjetGraphique.cpp
-  MenuPrincipal.cpp
-  IterativeDeepening.cpp
-  IA_MTDf.cpp
-  IA_main.cpp
-  IA_abTT.cpp
-  IA_ab.cpp
-  Damier.cpp
-  BanqueImage.cpp
+﻿  MenuPrincipal.cpp
   Génération de code en cours...
-     CrÚation de la bibliothÞque C:\Users\mathi\Desktop\Cpp\Othello\Debug\OthelloProject.lib et de l'objet C:\Users\mathi\Desktop\Cpp\Othello\Debug\OthelloProject.exp
+  Ignoré... (aucune modification pertinente détectée)
+  OthelloMain.cpp
   Othello.vcxproj -> C:\Users\mathi\Desktop\Cpp\Othello\Debug\OthelloProject.exe

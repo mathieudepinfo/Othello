@@ -1,0 +1,10 @@
+﻿  BanqueImage.cpp
+c:\users\mathi\desktop\cpp\othello\othello\BanqueImage.h(5): fatal error C1083: Impossible d'ouvrir le fichier include : 'SDL.h' : No such file or directory
+  MenuPrincipal.cpp
+c:\users\mathi\desktop\cpp\othello\othello\MenuPrincipal.h(5): fatal error C1083: Impossible d'ouvrir le fichier include : 'SDL.h' : No such file or directory
+  ObjetGraphique.cpp
+c:\users\mathi\desktop\cpp\othello\othello\ObjetGraphique.h(5): fatal error C1083: Impossible d'ouvrir le fichier include : 'SDL.h' : No such file or directory
+  OthelloMain.cpp
+OthelloMain.cpp(4): fatal error C1083: Impossible d'ouvrir le fichier include : 'SDL.h' : No such file or directory
+  Plateau.cpp
+c:\users\mathi\desktop\cpp\othello\othello\Plateau.h(5): fatal error C1083: Impossible d'ouvrir le fichier include : 'SDL.h' : No such file or directory
