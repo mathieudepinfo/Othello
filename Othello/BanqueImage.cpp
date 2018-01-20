@@ -7,18 +7,9 @@ BanqueImage::BanqueImage(SDL_Renderer* rend)
 {
 	images = new std::map<std::string,SDL_Texture*>();
 	renderer = rend;
-
-
-	char* source = new char[1000];
-#ifdef WIN32
-	GetCurrentDirectoryA(1000, source);
-#endif
-#ifndef WIN32
-	getcwd(source);
-#endif
-	std::string repertoireImages = std::string(source) + std::string("/images/");
+	
+	std::string repertoireImages =  std::string("../Othello/images/");
 	DIR * rep = opendir(repertoireImages.c_str());
-
 
 	if (rep == NULL) {
 		std::cerr << "cannot open : " << repertoireImages.c_str() << std::endl;
